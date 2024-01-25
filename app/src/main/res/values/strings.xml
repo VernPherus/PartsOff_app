@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PartsOff_app</string>
+    <string name="placeholdertxt">Lorem ipsum dolor</string>
 </resources>
