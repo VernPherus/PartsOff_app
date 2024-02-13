@@ -15,3 +15,4 @@ class IndexActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 }
+
