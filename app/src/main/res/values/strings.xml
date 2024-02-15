@@ -2,4 +2,7 @@
     <string name="app_name">PartsOff_app</string>
     <string name="placeholdertxt">Lorem ipsum dolor</string>
     <string name="click_me">Click me</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>

@@ -40,7 +40,7 @@
                 android:id="@+id/logintext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="36sp"
@@ -54,7 +54,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:padding="8dp" />
 
             <EditText
@@ -65,16 +65,16 @@
                 android:background="@drawable/custom_edit_text"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:padding="8dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
-                android:text="Login"
+                android:text="@string/login"
                 android:id="@+id/loginButton"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
 
         </LinearLayout>
