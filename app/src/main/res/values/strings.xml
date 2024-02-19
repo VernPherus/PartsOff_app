@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">PartsOff_app</string>
     <string name="placeholdertxt">Lorem ipsum dolor</string>
+        <string name="sign_up">Sign Up</string>
+        <string name="email_hint">Email</string>
+        <string name="password_hint">Password</string>
+        <string name="re_enter_password_hint">Re-enter Password</string>
+        <string name="sign_up_button">Sign Up</string>
+        <string name="logo_description">Logo</string>
 </resources>

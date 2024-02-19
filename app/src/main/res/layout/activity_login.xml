@@ -76,6 +76,14 @@
                 android:id="@+id/loginButton"
                 android:textSize="18dp" />
 
+            <Button
+                android:id="@+id/signupButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="Sign Up"
+                android:textSize="18dp" />
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

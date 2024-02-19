@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
+import android.content.Intent
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this,"Login Failed", Toast.LENGTH_SHORT).show()
             }
+
         })
+        binding.signupButton.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
