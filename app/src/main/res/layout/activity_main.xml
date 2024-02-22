@@ -1,18 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+              <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circle_shape"
+                android:src="@drawable/logo2"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="7dp"
+                android:contentDescription="@string/logo_description" />
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="201dp"
+                android:layout_height="37dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="13dp"
+                android:layout_toStartOf="@+id/cartButton"
+                android:background="@drawable/search_background"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="10dp"
+                android:hint="@string/searchdots"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:paddingEnd="100dp"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:importantForAutofill="no" />
+
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="23dp"
+                android:layout_toStartOf="@+id/profileButton"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cart"
+                android:src="@drawable/cart_icon" />
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/profile_icon" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <!-- Main Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/just_for_you"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Item 1 Container -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/div_background"
+                android:layout_marginBottom="8dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/item1Image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/item_1"
+                    android:src="@drawable/gpu_gtx1660super"
+                    tools:ignore="ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/item1Title"
+                    android:layout_toEndOf="@id/item1Image"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_1"
+                    android:textColor="#E8EAF6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/item1Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item1Title"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item1Image"
+                    android:text="@string/item_1_price"
+                    android:textColor="#E8EAF6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/item1Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item1Price"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item1Image"
+                    android:text="@string/item_1_description"
+                    android:textColor="#E8EAF6" />
+
+            </RelativeLayout>
+
+
+            <!-- Item 2 Container -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/div_background"
+                android:layout_marginBottom="8dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/item2Image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/gpu_rtx3060"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/item_2" />
+
+                <TextView
+                    android:id="@+id/item2Title"
+                    android:layout_toEndOf="@id/item2Image"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_2"
+                    android:textColor="#E8EAF6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/item2Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item2Title"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item2Image"
+                    android:text="@string/item_2_price"
+                    android:textColor="#E8EAF6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/item2Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item2Price"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item2Image"
+                    android:text="@string/item_2_description"
+                    android:textColor="#E8EAF6" />
+
+            </RelativeLayout>
+
+            <!-- Item 3 Container -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/div_background"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/item3Image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/gpu_rtx4080"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/item_3" />
+
+                <TextView
+                    android:id="@+id/item3Title"
+                    android:layout_toEndOf="@id/item3Image"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_3"
+                android:textColor="#E8EAF6"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/item3Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item3Title"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item3Image"
+                    android:text="@string/item_3_price"
+                    android:textColor="#E8EAF6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/item3Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item3Price"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/item3Image"
+                    android:text="@string/item_3_description"
+                    android:textColor="#E8EAF6" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
