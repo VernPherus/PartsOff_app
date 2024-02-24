@@ -4,5 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#7E56AE</color>
     <color name="secondary">#F6F6F6</color>
+    <color name="signUpButtonColor">#E8E4C9</color>
+
+
 
 </resources>
