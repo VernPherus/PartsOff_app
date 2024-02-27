@@ -30,3 +30,4 @@ class CatalogAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<Ca
         }
     }
 }
+

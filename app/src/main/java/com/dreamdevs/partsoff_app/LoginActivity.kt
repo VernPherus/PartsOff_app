@@ -25,6 +25,12 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener(View.OnClickListener {
             if (binding.email.text.toString() =="email" && binding.password.text.toString() == "1234"){
                 Toast.makeText(this,"Login Succesful!", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
+                finish()
+
             }else{
                 Toast.makeText(this,"Login Failed", Toast.LENGTH_SHORT).show()
             }
