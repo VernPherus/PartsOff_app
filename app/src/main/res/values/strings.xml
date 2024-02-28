@@ -1,8 +1,40 @@
 <resources>
     <string name="app_name">PartsOff_app</string>
     <string name="placeholdertxt">Lorem ipsum dolor</string>
-    <string name="click_me">Click me</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="re_enter_password_hint">Re-enter Password</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="logo_description">Logo</string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="todo">TODO</string>
     <string name="login">Login</string>
-    <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="search_hint">Search_background</string>
+    <string name="Just_For_You">Just For You</string>
+    <string name="just_for_you">Just For You!</string>
+    <string name="item_1">NVIDIA® GeForce® GTX 1660 SUPER™ </string>
+    <string name="item_2">GeForce RTX 3060 Ti GAMING</string>
+    <string name="item_3">GeForce RTX™ 4080 SUPER</string>
+    <string name="item_1_description">The TU116 graphics processor is an average sized chip with a die area of 284 mm² and 6,600 million.</string>
+    <string name="item_2_description">cOOl GPU!</string>
+    <string name="item_3_description">Built on the 5 nm process, and based on the AD103 graphics processor.</string>
+    <string name="item_1_price">₱20,599.99 </string>
+    <string name="item_2_price">₱30,599.99</string>
+    <string name="item_3_price">₱50,599.99</string>
+    <string name="cart">Cart symbol</string>
+    <string name="searchdots">Search…</string>
+    <string name="checkout">Checkout</string>
+    <string name="_0">0</string>
+    <string name="buy_now">Buy Now!</string>
+    <string name="your_cart">Your Cart</string>
+
 </resources>
