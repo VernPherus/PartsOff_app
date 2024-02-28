@@ -7,7 +7,7 @@ object RetrofitInstance {
 
     val api: PartsOffApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl("http://64.23.185.162/api")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PartsOffApi::class.java)
