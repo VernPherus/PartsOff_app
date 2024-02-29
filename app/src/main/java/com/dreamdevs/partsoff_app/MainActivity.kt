@@ -19,58 +19,32 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var newRecyclerview : RecyclerView
-    private lateinit var productAdapter: ProductAdapter
-    private lateinit var newArrayList : ArrayList<Products>
+
     private lateinit var title : Array<String>
     private lateinit var description : Array<Any>
     private lateinit var price : Array<Int>
     private lateinit var qty : Array<Int>
 
+
+    private lateinit var productAdapter: ProductAdapter
+    private var newArrayList: ArrayList<Products> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        title = arrayOf(
-            "RTX 2060 super",
-            "RX 5700 xt",
-            "AMD Ryzen 7 7800x3d",
-            "Adata 950 Legend",
-            "HDMI Cable"
-        )
-
-        description = arrayOf(
-            "product desc",
-            "lorem ipsum dolor amet man I dunno I don't speak latin shut yo bitch ahh up this why yo mama dead, this why yo daddy ain't commin back with the milk",
-            "product desc",
-            "product desc",
-            "product desc"
-        )
-
-        price = arrayOf(
-            21000,
-            15000,
-            20000,
-            3000,
-            250
-        )
-
-        qty = arrayOf(
-            21,
-            15,
-            20,
-            30,
-            25
-        )
 
         newRecyclerview = findViewById(R.id.productsRecycler)
         newRecyclerview.layoutManager = LinearLayoutManager(this)
         newRecyclerview.setHasFixedSize(true)
 
         newArrayList = arrayListOf<Products>()
+
+
+        productAdapter = ProductAdapter(newArrayList)
+        newRecyclerview.adapter = productAdapter
+
         fetchProducts()
-
-
     }
 
     private fun getProductData() {
@@ -89,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<ProductsData>>, response: Response<List<ProductsData>>) {
                 if (response.isSuccessful) {
                     val productList = response.body()
-                    // Process the list of products
                     productList?.let {
                         updateRecyclerView(productList)
                     }
@@ -104,23 +77,13 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun updateRecyclerView(appointments: List<ProductsData>) {
-        if (appointments.isNotEmpty()) {
-            val productList = appointments.map { appointment ->
-                Products(
-                    appointment.title,
-                    appointment.description ?: "", // Handle null description if needed
-                    appointment.price.toInt(),
-                    appointment.qty.toInt()
-                )
-            }
-            newArrayList.clear() // Clear existing data
-            newArrayList.addAll(productList) // Add new data
-            productAdapter.notifyDataSetChanged() // Notify adapter of dataset change
-        } else {
-            // Handle case where appointments list is empty
-            // For example, show a message indicating no appointments
+    private fun updateRecyclerView(productList: List<ProductsData>) {
+        newArrayList.clear()
+        productList.forEach { productData ->
+            val product = Products(productData.title, productData.description ?: "", productData.price.toInt(), productData.qty.toInt())
+            newArrayList.add(product)
         }
+        productAdapter.notifyDataSetChanged()
     }
 
 
