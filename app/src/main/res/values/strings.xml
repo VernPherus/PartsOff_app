@@ -36,5 +36,7 @@
     <string name="_0">0</string>
     <string name="buy_now">Buy Now!</string>
     <string name="your_cart">Your Cart</string>
+    <string name="Name">Name</string>
+    <string name="phone">Phone</string>
 
 </resources>

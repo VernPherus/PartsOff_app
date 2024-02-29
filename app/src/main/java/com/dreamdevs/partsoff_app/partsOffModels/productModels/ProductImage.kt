@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.partsOffClasses.productClasses
+package com.dreamdevs.partsoff_app.partsOffModels.productModels
 
 data class ProductImage(
     val created_at: String,

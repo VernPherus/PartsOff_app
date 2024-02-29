@@ -1,9 +1,16 @@
 package com.dreamdevs.partsoff_app
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.dreamdevs.partsoff_app.Api.RetrofitInstance
 import com.dreamdevs.partsoff_app.databinding.ActivitySignUpBinding
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -18,6 +25,71 @@ class SignUpActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { super.onBackPressed() }
+
+        binding.signupButton.setOnClickListener {
+
+            val name = binding.name.text.toString().trim()
+            val email = binding.email.text.toString().trim()
+            val phoneNumber = binding.phoneNumber.text.toString().trim()
+            val password = binding.password.text.toString().trim()
+            val passwordConfirmation = binding.reEnterPassword.text.toString().trim()
+
+            if (name.isEmpty())
+            {
+                binding.name.error = "Name required"
+                binding.name.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (email.isEmpty())
+            {
+                binding.email.error = "Email required"
+                binding.email.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (phoneNumber.isEmpty())
+            {
+                binding.phoneNumber.error = "Phone number required"
+                binding.phoneNumber.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty())
+            {
+                binding.password.error = "Password required"
+                binding.password.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (passwordConfirmation.isEmpty() || passwordConfirmation!=password)
+            {
+                binding.reEnterPassword.error = "Incorrect password"
+                binding.reEnterPassword.requestFocus()
+                return@setOnClickListener
+            }
+
+            RetrofitInstance.instance.register(
+                name,
+                email,
+                phoneNumber,
+                password,
+                passwordConfirmation
+            ).enqueue(object: Callback<RegisterResponse>{
+                override fun onResponse(
+                    call: Call<RegisterResponse>,
+                    response: Response<RegisterResponse>
+                ) {
+                    Toast.makeText(applicationContext, response.body()?.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                }
+
+            })
+
+        }
     }
 
     @Deprecated("Deprecated in Java",

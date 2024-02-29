@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.partsOffClasses.categoryClasses
+package com.dreamdevs.partsoff_app.partsOffModels.categoryModels
 
 data class Category(
     val created_at: String,

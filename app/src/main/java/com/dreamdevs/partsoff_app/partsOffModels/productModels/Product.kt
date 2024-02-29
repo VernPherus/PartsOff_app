@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.partsOffClasses.productClasses
+package com.dreamdevs.partsoff_app.partsOffModels.productModels
 
 data class Product(
     val category_id: Int,

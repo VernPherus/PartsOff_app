@@ -1,22 +1,41 @@
 package com.dreamdevs.partsoff_app.Api
 
-import com.dreamdevs.partsoff_app.userclasses.User
-import com.dreamdevs.partsoff_app.partsOffClasses.categoryClasses.Category
-import com.dreamdevs.partsoff_app.partsOffClasses.productClasses.Product
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginResponse
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
+import com.dreamdevs.partsoff_app.partsOffModels.categoryModels.Category
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.Product
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.Response
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 interface PartsOffApi {
 
-    @GET("/users")
-    suspend fun getUsers() : Response<List<User>>
+    @FormUrlEncoded
+    @POST("register")
+    fun register(
+        @Field("name") name:String,
+        @Field("email") email:String,
+        @Field("phone") phone:String,
+        @Field("password") password:String,
+        @Field("password_confirmation") passwordConfirmation:String,
+    ): Call<RegisterResponse>
+
+    @FormUrlEncoded
+    @GET("authenticate")
+    fun authenticate(
+        @Field("email") email:String,
+        @Field("password") password: String
+    ): Call<LoginResponse>
 
 
-    @GET("/categories")
+    @GET("categories")
     suspend fun getCategories() : Response<List<Category>>
 
 
-    @GET("/products")
-    suspend fun getProducts() : Response<List<Product>>
+    @GET("products")
+    suspend fun getProducts() : Product
 
 }
