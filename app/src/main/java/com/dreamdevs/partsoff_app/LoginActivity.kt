@@ -6,7 +6,7 @@ import android.view.View
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
 import android.content.Intent
 import android.widget.Toast
-import com.dreamdevs.partsoff_app.Api.RetrofitInstance
+import com.dreamdevs.partsoff_app.api.RetrofitInstance
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginResponse
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call

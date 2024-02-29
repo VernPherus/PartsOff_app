@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.Api
+package com.dreamdevs.partsoff_app.api
 
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginResponse
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse

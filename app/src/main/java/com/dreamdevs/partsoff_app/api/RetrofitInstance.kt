@@ -1,6 +1,5 @@
-package com.dreamdevs.partsoff_app.Api
+package com.dreamdevs.partsoff_app.api
 
-import com.dreamdevs.partsoff_app.Api.PartsOffApi
 import android.util.Base64
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
