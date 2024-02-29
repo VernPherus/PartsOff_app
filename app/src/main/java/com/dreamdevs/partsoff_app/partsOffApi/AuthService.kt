@@ -1,6 +1,6 @@
 package com.dreamdevs.partsoff_app.partsOffApi
 
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Product
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
@@ -17,5 +17,5 @@ interface AuthService {
     ): Call<Void> // Update the return type to Void since there's no token
 
     @GET("displayProducts")
-    fun getProducts() : Response<List<Product>>
+    fun getProducts() : Response<List<Products>>
 }
