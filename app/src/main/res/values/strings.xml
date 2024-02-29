@@ -40,5 +40,8 @@
     <string name="phone">Phone</string>
     <string name="product_title">Product Title</string>
     <string name="price_placeholder">₱0.00</string>
+    <string name="qty">QTY:</string>
+    <string name="price">Price:</string>
+    <string name="sample_description">Sample description</string>
 
 </resources>

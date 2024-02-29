@@ -16,6 +16,6 @@ interface AuthService {
         @Field("password") password: String
     ): Call<Void> // Update the return type to Void since there's no token
 
-    @GET("products")
+    @GET("displayProducts")
     fun getProducts() : Response<List<Product>>
 }

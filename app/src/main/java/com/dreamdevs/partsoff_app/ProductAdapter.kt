@@ -1,56 +1,41 @@
 package com.dreamdevs.partsoff_app
 
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.dreamdevs.partsoff_app.databinding.ListProductBinding
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Product
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductImage
-import com.google.android.material.imageview.ShapeableImageView
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 
-class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-
-    inner class ProductViewHolder(val binding: ListProductBinding) : RecyclerView.ViewHolder(binding.root)
-
-    private val diffCallback = object : DiffUtil.ItemCallback<Product>(){
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
-    }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-    var product : List<Product>
-        get() = differ.currentList
-        set(value) {differ.submitList(value)}
+class ProductAdapter(private val productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(ListProductBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ))
+
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_product, parent, false)
+        return ProductViewHolder(itemView)
+
     }
 
-    override fun getItemCount() = product.size
+    override fun getItemCount(): Int {
+        return productList.size
+    }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.binding.apply {
-            val product = product[position]
-            productTitle.text = product.title
-            productPrice.text = "₱" + product.price.toString()
-        }
+        val currentItem = productList[position]
+        holder.productTitle.text = currentItem.title
+        holder.productDesc.text = currentItem.description.toString()
+        holder.productPrice.text = currentItem.price.toString()
+        holder.productQty.text = currentItem.qty.toString()
     }
 
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        val productTitle : TextView = itemView.findViewById(R.id.product_title)
+        val productDesc : TextView = itemView.findViewById(R.id.product_desc)
+        val productPrice : TextView = itemView.findViewById(R.id.product_price)
+        val productQty : TextView = itemView.findViewById(R.id.product_qty)
+
+    }
 
 }
