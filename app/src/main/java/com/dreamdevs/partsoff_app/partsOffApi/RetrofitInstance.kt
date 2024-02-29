@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.api
+package com.dreamdevs.partsoff_app.partsOffApi
 
 import android.util.Base64
 import okhttp3.OkHttpClient
@@ -17,7 +17,7 @@ object RetrofitInstance {
 
             val requestBuilder = original.newBuilder()
                     .addHeader("Authorization", AUTH)
-                    .method(original.method(), original.body())
+                    .method(original.method, original.body)
 
             val request = requestBuilder.build()
             chain.proceed(request)

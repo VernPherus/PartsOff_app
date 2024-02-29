@@ -1,4 +1,4 @@
-package com.dreamdevs.partsoff_app.api
+package com.dreamdevs.partsoff_app.partsOffApi
 
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginResponse
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
@@ -24,7 +24,7 @@ interface PartsOffApi {
     ): Call<RegisterResponse>
 
     @FormUrlEncoded
-    @GET("authenticate")
+    @POST("authenticate")
     fun authenticate(
         @Field("email") email:String,
         @Field("password") password: String

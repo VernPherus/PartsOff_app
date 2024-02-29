@@ -3,7 +3,7 @@ package com.dreamdevs.partsoff_app
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+
 import com.dreamdevs.partsoff_app.databinding.ItemCatalogBinding
 
 class CatalogAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() {
@@ -24,7 +24,7 @@ class CatalogAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<Ca
 
     class CatalogViewHolder(private val binding: ItemCatalogBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
-            Glide.with(binding.itemImage.context).load(item.imageUrl).into(binding.itemImage)
+
             binding.itemName.text = item.name
             binding.itemPrice.text = item.price
         }
