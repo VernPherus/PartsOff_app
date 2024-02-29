@@ -1,10 +1,13 @@
 package com.dreamdevs.partsoff_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.dreamdevs.partsoff_app.databinding.ActivitySignUpBinding
+import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterRequest
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -67,9 +70,29 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
+            performRegistration(name, email, phoneNumber, password, passwordConfirmation)
 
         }
+    }
+
+    private fun performRegistration(name: String, email: String, phone: String, password: String, passwordConfirmation: String){
+        val registrationRequest = RegisterRequest(name, email, phone, password, passwordConfirmation)
+        val call = RetrofitClient.authService.register(name, email, phone, password, passwordConfirmation)
+        call.enqueue(object : Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful){
+                    val intent = Intent(this@SignUpActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }else{
+
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     @Deprecated("Deprecated in Java",
