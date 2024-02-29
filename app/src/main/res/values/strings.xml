@@ -38,5 +38,7 @@
     <string name="your_cart">Your Cart</string>
     <string name="Name">Name</string>
     <string name="phone">Phone</string>
+    <string name="product_title">Product Title</string>
+    <string name="price_placeholder">₱0.00</string>
 
 </resources>
