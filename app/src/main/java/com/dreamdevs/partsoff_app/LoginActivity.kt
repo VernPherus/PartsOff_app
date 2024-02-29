@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
-                        if (response.body()?.message.toString() == "Login successful"){
+                        if (response.body()?.status!!){
 
                             SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
 
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(intent)
 
                         }else{
-                            Toast.makeText(applicationContext, response.body()?.message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "Login Failed", Toast.LENGTH_LONG).show()
                         }
                     }
 
