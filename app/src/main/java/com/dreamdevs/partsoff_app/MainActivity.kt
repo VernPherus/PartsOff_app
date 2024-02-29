@@ -4,14 +4,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
+import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var newRecyclerview : RecyclerView
+    private lateinit var productAdapter: ProductAdapter
     private lateinit var newArrayList : ArrayList<Products>
     private lateinit var title : Array<String>
     private lateinit var description : Array<Any>
@@ -60,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         newRecyclerview.setHasFixedSize(true)
 
         newArrayList = arrayListOf<Products>()
-        getProductData()
+        fetchProducts()
 
 
     }
@@ -74,6 +82,45 @@ class MainActivity : AppCompatActivity() {
 
         newRecyclerview.adapter = ProductAdapter(newArrayList)
 
+    }
+
+    private fun fetchProducts() {
+        RetrofitClient.authService.getProducts().enqueue(object : Callback<List<ProductsData>> {
+            override fun onResponse(call: Call<List<ProductsData>>, response: Response<List<ProductsData>>) {
+                if (response.isSuccessful) {
+                    val productList = response.body()
+                    // Process the list of products
+                    productList?.let {
+                        updateRecyclerView(productList)
+                    }
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProductsData>>, t: Throwable) {
+                // Handle failure here
+            }
+        })
+    }
+
+    private fun updateRecyclerView(appointments: List<ProductsData>) {
+        if (appointments.isNotEmpty()) {
+            val productList = appointments.map { appointment ->
+                Products(
+                    appointment.title,
+                    appointment.description ?: "", // Handle null description if needed
+                    appointment.price.toInt(),
+                    appointment.qty.toInt()
+                )
+            }
+            newArrayList.clear() // Clear existing data
+            newArrayList.addAll(productList) // Add new data
+            productAdapter.notifyDataSetChanged() // Notify adapter of dataset change
+        } else {
+            // Handle case where appointments list is empty
+            // For example, show a message indicating no appointments
+        }
     }
 
 
