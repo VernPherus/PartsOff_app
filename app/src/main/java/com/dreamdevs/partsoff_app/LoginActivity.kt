@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
 import android.content.Intent
-import android.widget.Toast
-import com.dreamdevs.partsoff_app.partsOffApi.RetrofitInstance
-import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginResponse
+import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,6 +16,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener(View.OnClickListener {
 
-            val email = binding.email.text.toString().trim()
-            val password = binding.password.text.toString().trim()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
 
             if (email.isEmpty()){
                 binding.email.error = "Email Required"
@@ -40,31 +41,7 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            RetrofitInstance.instance.authenticate(email, password)
-                .enqueue(object: Callback<LoginResponse>{
-                    override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
-                    ) {
-                        if (response.body()?.status!!){
-
-                            SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
-
-                            val intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                            startActivity(intent)
-
-                        }else{
-                            Toast.makeText(applicationContext, "Login Failed", Toast.LENGTH_LONG).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
-
-                })
+            performLogin(email, password)
 
         })
 
@@ -84,5 +61,25 @@ class LoginActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+    }
+
+    private fun performLogin(email: String, password: String) {
+        val loginRequest = LoginRequest(email, password)
+        val call = RetrofitClient.authService.login(email, password)
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    // Handle successful login, e.g., navigate to main activity
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // Handle login error, e.g., display error message
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // Handle network error, e.g., display error message
+            }
+        })
     }
 }

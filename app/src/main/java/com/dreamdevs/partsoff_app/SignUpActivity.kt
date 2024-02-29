@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.dreamdevs.partsoff_app.partsOffApi.RetrofitInstance
 import com.dreamdevs.partsoff_app.databinding.ActivitySignUpBinding
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
 import retrofit2.Call
@@ -68,25 +67,7 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            RetrofitInstance.instance.register(
-                name,
-                email,
-                phoneNumber,
-                password,
-                passwordConfirmation
-            ).enqueue(object: Callback<RegisterResponse>{
-                override fun onResponse(
-                    call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
-                ) {
-                    Toast.makeText(applicationContext, response.body()?.message, Toast.LENGTH_LONG).show()
-                }
 
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                }
-
-            })
 
         }
     }
