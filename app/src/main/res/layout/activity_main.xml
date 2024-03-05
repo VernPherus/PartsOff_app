@@ -36,24 +36,24 @@
 
             <EditText
                 android:id="@+id/searchEditText"
-                android:layout_width="201dp"
+                android:layout_width="202dp"
                 android:layout_height="48dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="76dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="13dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="29dp"
+                android:layout_marginBottom="8dp"
                 android:layout_toStartOf="@+id/cartButton"
                 android:background="@drawable/search_background"
                 android:drawableStart="@drawable/search_icon"
-                android:drawablePadding="1dp"
+                android:drawablePadding="2dp"
                 android:hint="@string/searchdots"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:paddingStart="20dp"
-                android:paddingEnd="100dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="50dp"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black" />
@@ -99,13 +99,25 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/forYouText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For You!"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecycler"
-        android:layout_width="411dp"
-        android:layout_height="644dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
+        app:layout_constraintTop_toBottomOf="@id/forYouText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
