@@ -2,33 +2,33 @@ package com.dreamdevs.partsoff_app.storage
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.dreamdevs.partsoff_app.partsOffModels.authModels.User
+import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 
 class SharedPrefManager private constructor(private val mCtx: Context) {
 
     val isLoggedIn: Boolean
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return sharedPreferences.getInt("userId", -1) != -1
+            return sharedPreferences.getString("userEmail", null) != null
         }
 
-    val user: User
+    val user: LoginRequest
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return User(
+            return LoginRequest(
                 sharedPreferences.getString("userEmail", null).toString(),
-                sharedPreferences.getInt("userId", -1)
+                sharedPreferences.getString("userPassword", null).toString()
             )
         }
 
 
-    fun saveUser(user: User) {
+    fun saveUser(user: LoginRequest) {
 
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
-        editor.putInt("userId", user.userId)
-        editor.putString("userEmail", user.userEmail)
+        editor.putString("userId", user.email)
+        editor.putString("userEmail", user.password)
 
         editor.apply()
 
@@ -42,7 +42,7 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
     }
 
     companion object {
-        private val SHARED_PREF_NAME = "my_shared_preff"
+        private const val SHARED_PREF_NAME = "userPrefs"
         @SuppressLint("StaticFieldLeak")
         private var mInstance: SharedPrefManager? = null
         @Synchronized
