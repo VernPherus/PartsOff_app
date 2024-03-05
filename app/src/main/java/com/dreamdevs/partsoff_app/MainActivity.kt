@@ -61,10 +61,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
+
         productDataList.forEach { productData ->
-            productList.add(Products(productData.title,
-                productData.description, productData.price.toInt(), productData.qty.toInt()))
+            val quantity = productData.qty.toInt()
+            if (quantity > 0) {
+                productList.add(
+                    Products(
+                        productData.title,
+                        productData.description,
+                        productData.price.toInt(),
+                        quantity
+                    )
+                )
+            }
         }
+
+        productList.reverse()
+
         productAdapter.notifyDataSetChanged()
     }
 
