@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         productAdapter.setOnItemClickListener(object : onItemListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@MainActivity, "You Clicked item #: $position", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "You tapped item #: $position", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -99,15 +99,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
             }
-        })
-    }
-
-    private fun setOnclickListener(){
-        productAdapter.setOnItemClickListener(object : onItemListener{
-            override fun onItemClick(position: Int) {
-                Toast.makeText(this@MainActivity, "Tapped item: $position", Toast.LENGTH_SHORT).show()
-            }
-
         })
     }
 }
