@@ -1,6 +1,7 @@
 package com.dreamdevs.partsoff_app
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         productAdapter = ProductAdapter(newArrayList)
         newRecyclerview.adapter = productAdapter
+        productAdapter.setOnItemClickListener(object : onItemListener{
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@MainActivity, "You Clicked item #: $position", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         fetchProducts()
     }

@@ -10,10 +10,12 @@ import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 
 class ProductAdapter(private val productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
+    private lateinit var clickListener : onItemListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_product, parent, false)
-        return ProductViewHolder(itemView)
+        return ProductViewHolder(itemView, clickListener)
 
     }
 
@@ -29,12 +31,25 @@ class ProductAdapter(private val productList : ArrayList<Products>) : RecyclerVi
         holder.productQty.text = currentItem.qty.toString()
     }
 
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ProductViewHolder(itemView: View, listener: onItemListener) : RecyclerView.ViewHolder(itemView){
 
         val productTitle : TextView = itemView.findViewById(R.id.product_title)
         val productDesc : TextView = itemView.findViewById(R.id.product_desc)
         val productPrice : TextView = itemView.findViewById(R.id.product_price)
         val productQty : TextView = itemView.findViewById(R.id.product_qty)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
+    }
+
+    fun setOnItemClickListener(listener: onItemListener){
+
+        clickListener = listener
+
 
     }
 
