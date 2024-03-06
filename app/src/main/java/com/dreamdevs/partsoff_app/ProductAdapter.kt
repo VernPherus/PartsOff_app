@@ -43,7 +43,6 @@ class ProductAdapter(private val productList : ArrayList<Products>) : RecyclerVi
                 listener.onItemClick(adapterPosition)
             }
         }
-
     }
 
     fun setOnItemClickListener(listener: onItemListener){
