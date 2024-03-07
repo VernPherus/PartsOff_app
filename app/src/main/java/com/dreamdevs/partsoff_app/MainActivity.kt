@@ -1,5 +1,6 @@
 package com.dreamdevs.partsoff_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import android.text.Editable
@@ -60,7 +61,9 @@ class MainActivity : AppCompatActivity() {
                     updateRecyclerView(productListData)
 //                    productAdapter.setOnItemClickListener(object : OnItemListener{
 //                        override fun onItemClick(position: Int) {
-//                            Toast.makeText(this@MainActivity, "Tapped item: $position", Toast.LENGTH_SHORT).show()
+//                            val intent = Intent(this@MainActivity, ProductView::class.java)
+//                            intent.putExtra("title", productList[position].title)
+//                            startActivity(intent)
 //                        }
 //                    })
                 } else {

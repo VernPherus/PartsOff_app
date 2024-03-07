@@ -13,7 +13,7 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
     var productListFiltered = productList
-    //private lateinit var clickListener : OnItemListener
+//    private lateinit var clickListener : OnItemListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView =
