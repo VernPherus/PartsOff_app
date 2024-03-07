@@ -13,7 +13,7 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
     var productListFiltered = productList
-    private lateinit var clickListener : onItemListener
+    private lateinit var clickListener : OnItemListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView =
@@ -61,7 +61,7 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
         }
     }
 
-    class ProductViewHolder(itemView: View, listener: onItemListener) : RecyclerView.ViewHolder(itemView) {
+    class ProductViewHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView) {
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
@@ -74,7 +74,7 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
         }
     }
 
-    fun setOnItemClickListener(listener: onItemListener){
+    fun setOnItemClickListener(listener: OnItemListener){
         clickListener = listener
     }
 }

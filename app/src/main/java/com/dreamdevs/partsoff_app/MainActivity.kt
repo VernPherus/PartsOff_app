@@ -58,9 +58,9 @@ class MainActivity : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
-                    productAdapter.setOnItemClickListener(object : onItemListener{
+                    productAdapter.setOnItemClickListener(object : OnItemListener{
                         override fun onItemClick(position: Int) {
-
+                            
                         }
                     })
                 } else {

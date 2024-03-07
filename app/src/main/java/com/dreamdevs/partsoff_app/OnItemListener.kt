@@ -1,5 +1,5 @@
 package com.dreamdevs.partsoff_app
 
-interface onItemListener {
+interface OnItemListener {
     fun onItemClick(position : Int)
 }
