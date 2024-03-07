@@ -13,12 +13,12 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
     var productListFiltered = productList
-    private lateinit var clickListener : OnItemListener
+//    private lateinit var clickListener : OnItemListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.list_product, parent, false)
-        return ProductViewHolder(itemView, clickListener)
+        return ProductViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -61,20 +61,20 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
         }
     }
 
-    class ProductViewHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView) {
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
 
-        init {
-            itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-        }
+//        init {
+//            itemView.setOnClickListener {
+//                listener.onItemClick(adapterPosition)
+//            }
+//        }
     }
 
-    fun setOnItemClickListener(listener: OnItemListener){
-        clickListener = listener
-    }
+//    fun setOnItemClickListener(listener: OnItemListener){
+//        clickListener = listener
+//    }
 }
