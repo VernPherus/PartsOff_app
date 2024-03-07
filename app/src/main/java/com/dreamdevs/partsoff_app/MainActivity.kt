@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
-                    productAdapter.setOnItemClickListener(object : OnItemListener{
-                        override fun onItemClick(position: Int) {
-                            
-                        }
-                    })
+//                    productAdapter.setOnItemClickListener(object : OnItemListener{
+//                        override fun onItemClick(position: Int) {
+//                            Toast.makeText(this@MainActivity, "Tapped item: $position", Toast.LENGTH_SHORT).show()
+//                        }
+//                    })
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
