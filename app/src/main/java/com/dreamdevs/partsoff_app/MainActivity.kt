@@ -27,13 +27,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
-
-        productAdapter.setOnItemClickListener(object : onItemListener{
-            override fun onItemClick(position: Int) {
-                Toast.makeText(this@MainActivity, "You tapped item #: $position", Toast.LENGTH_SHORT).show()
-            }
-        })
-
         fetchProducts()
         setupSearch()
     }
@@ -52,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
+                    productAdapter.setOnItemClickListener(object : onItemListener{
+                        override fun onItemClick(position: Int) {
+
+                        }
+                    })
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
@@ -100,5 +98,5 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
-    }
+    } 
 }
