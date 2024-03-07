@@ -85,10 +85,13 @@ class MainActivity : AppCompatActivity() {
             if (quantity > 0) {
                 productList.add(
                     Products(
+                        productData.id,
                         productData.title,
                         productData.description,
                         productData.price.toInt(),
-                        quantity
+                        quantity,
+                        productData.productImages,
+
                     )
                 )
             }

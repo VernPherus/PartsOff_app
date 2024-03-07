@@ -19,7 +19,6 @@
         android:src="@drawable/gpu_gtx1660super"
         app:shapeAppearanceOverlay="@style/RoundCorner" />
 
-
     <TextView
         android:id="@+id/product_title"
         android:layout_width="296dp"
