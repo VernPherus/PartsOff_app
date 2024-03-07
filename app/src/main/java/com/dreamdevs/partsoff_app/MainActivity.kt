@@ -29,6 +29,19 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+        setupRefreshButton()
+    }
+
+    private fun scrollToTop() {
+        binding.productsRecycler.scrollToPosition(0)
+    }
+
+    private fun setupRefreshButton() {
+        binding.refreshButton.setOnClickListener {
+            // Handle refresh button click
+            fetchProducts()
+            scrollToTop()
+        }
     }
 
     private fun setupRecyclerView() {
