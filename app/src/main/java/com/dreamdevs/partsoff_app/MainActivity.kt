@@ -1,5 +1,6 @@
 package com.dreamdevs.partsoff_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,11 +12,12 @@ import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import android.util.Log
 import android.widget.Toast
+import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity<Button> : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (!SharedPrefManager.getInstance(applicationContext).isLoggedIn) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         setupRecyclerView()
         fetchProducts()
@@ -57,6 +65,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 
 
     private fun updateRecyclerView(productDataList: List<ProductsData>) {

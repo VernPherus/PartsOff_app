@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity(email: String, password: String) : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
 
     private fun performLogin(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
