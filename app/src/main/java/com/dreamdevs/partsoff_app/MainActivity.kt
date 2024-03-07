@@ -1,52 +1,102 @@
 package com.dreamdevs.partsoff_app
 
-import android.net.http.HttpException
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
-import java.io.IOException
+import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
+import android.util.Log
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
-    
-    private lateinit var binding : ActivityMainBinding
 
-    private lateinit var todoAdapter: TodoAdapter
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var productAdapter: ProductAdapter
+    private var productList: ArrayList<Products> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setupRecyclerView()
+        fetchProducts()
+        setupSearch()
+    }
 
-        lifecycleScope.launchWhenCreated {
-            binding.progressBar.isVisible = true
-            val response = try {
-                RetrofitInstance.api.getTodos()
-            }catch (e: IOException) {
-                Log.e(TAG, "IOException, you might not have internet connection")
-                binding.progressBar.isVisible = false
-                return@launchWhenCreated
-            } catch (e: retrofit2.HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
-                binding.progressBar.isVisible = false
-                return@launchWhenCreated
+    private fun setupRecyclerView() {
+        binding.productsRecycler.layoutManager = LinearLayoutManager(this)
+        binding.productsRecycler.setHasFixedSize(true)
+        productAdapter = ProductAdapter(productList)
+        binding.productsRecycler.adapter = productAdapter
+    }
+
+    private fun fetchProducts() {
+        RetrofitClient.authService.getProducts().enqueue(object : Callback<List<ProductsData>> {
+            override fun onResponse(call: Call<List<ProductsData>>, response: Response<List<ProductsData>>) {
+                if (response.isSuccessful) {
+                    val productListData = response.body() ?: return
+
+                    updateRecyclerView(productListData)
+                    productAdapter.setOnItemClickListener(object : onItemListener{
+                        override fun onItemClick(position: Int) {
+
+                        }
+                    })
+                } else {
+                    Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
+                    Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
+                }
             }
-            if (response.isSuccessful && response.body() !=null) {
-                todoAdapter.todos = response.body()!!
-            } else {
-                Log.e(TAG, "Response not successful")
+
+            override fun onFailure(call: Call<List<ProductsData>>, t: Throwable) {
+                Log.e("FetchProducts", "Failed to fetch products", t)
+                Toast.makeText(this@MainActivity, "An error occurred while fetching products. Please check your internet connection and try again.", Toast.LENGTH_LONG).show()
             }
-            binding.progressBar.isVisible = false
+        })
+    }
+
+
+    private fun updateRecyclerView(productDataList: List<ProductsData>) {
+        productList.clear()
+
+        productDataList.forEach { productData ->
+            val quantity = productData.qty.toInt()
+            if (quantity > 0) {
+                productList.add(
+                    Products(
+                        productData.title,
+                        productData.description,
+                        productData.price.toInt(),
+                        quantity
+                    )
+                )
+            }
         }
+
+        productList.reverse()
+
+        productAdapter.notifyDataSetChanged()
     }
 
-    private fun setupRecyclerView() = binding.rvTodos.apply {
-        todoAdapter = TodoAdapter()
-        adapter = todoAdapter
-        layoutManager = LinearLayoutManager(this@MainActivity)
-    }
+    private fun setupSearch() {
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                productAdapter.filter.filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    } 
 }

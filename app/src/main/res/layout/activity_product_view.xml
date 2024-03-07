@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductView">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle_shape"
+                android:contentDescription="@string/logo_description"
+                android:padding="7dp"
+                android:src="@drawable/logo2" />
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="201dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="13dp"
+                android:layout_toStartOf="@+id/cartButton"
+                android:background="@drawable/search_background"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="10dp"
+                android:hint="@string/searchdots"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:paddingEnd="100dp"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="23dp"
+                android:layout_toStartOf="@+id/profileButton"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cart"
+                android:src="@drawable/cart_icon"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/cartQuantityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cartButton"
+                android:layout_alignEnd="@id/cartButton"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="-8dp"
+                android:gravity="center"
+                android:minWidth="20dp"
+                android:minHeight="20dp"
+                android:padding="4dp"
+                android:text="@string/_0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#F3E5F5" />
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/profile_icon"
+                tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nested_constraint"
+        android:layout_width="410dp"
+        android:layout_height="593dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/product_disp"
+            android:layout_width="match_parent"
+            android:layout_height="236dp"
+            android:contentDescription="@string/item_1_description"
+            android:src="@drawable/gpu_gtx1660super"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="374dp"
+            android:layout_height="34dp"
+            android:text="@string/product_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_disp" />
+
+        <TextView
+            android:id="@+id/textPriceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/price"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textQTYLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qty"
+            app:layout_constraintStart_toStartOf="@+id/textPriceLabel"
+            app:layout_constraintTop_toBottomOf="@+id/textPriceLabel" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="49dp"
+            android:layout_height="19dp"
+            android:text="@string/price_placeholder"
+            app:layout_constraintStart_toEndOf="@+id/textPriceLabel"
+            app:layout_constraintTop_toTopOf="@+id/textPriceLabel" />
+
+        <TextView
+            android:id="@+id/itemQty"
+            android:layout_width="35dp"
+            android:layout_height="19dp"
+            android:text="@string/_0"
+            app:layout_constraintStart_toEndOf="@+id/textQTYLabel"
+            app:layout_constraintTop_toTopOf="@+id/textQTYLabel" />
+
+        <TextureView
+            android:id="@+id/productDesc"
+            android:layout_width="370dp"
+            android:layout_height="262dp"
+            android:layout_marginTop="56dp"
+            android:text="@string/sample_description"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:layout_width="152dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/checkout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nested_constraint"
+        app:layout_constraintVertical_bias="0.631" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

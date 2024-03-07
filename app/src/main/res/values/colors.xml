@@ -2,7 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#7E56AE</color>
+    <color name="primary">#6b21a8</color>
     <color name="secondary">#F6F6F6</color>
+    <color name="signUpButtonColor">#E8E4C9</color>
+    <color name="underline">#D8D6D6</color>
+
+
 
 </resources>

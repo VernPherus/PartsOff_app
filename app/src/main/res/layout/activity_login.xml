@@ -17,7 +17,9 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/logo2" />
+            android:src="@drawable/logo2"
+            android:contentDescription="@string/todo"
+            tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
@@ -34,13 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="40dp">
 
             <TextView
                 android:id="@+id/logintext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="36sp"
@@ -52,10 +54,12 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/custom_edit_text"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
-                android:padding="8dp" />
+                android:hint="@string/email"
+                android:padding="8dp"
+                android:autofillHints=""
+                android:inputType="" />
 
             <EditText
                 android:id="@+id/password"
@@ -63,19 +67,36 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edit_text"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:hint="Password"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:inputType="textPassword"
+                android:autofillHints="password" />
 
             <Button
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:text="Login"
-                android:id="@+id/loginButton"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"/>
+
+            <Button
+                android:id="@+id/signupButton"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Sign Up"
+                android:textSize="18dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
