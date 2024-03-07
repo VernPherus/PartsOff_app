@@ -1,6 +1,7 @@
 package com.dreamdevs.partsoff_app
 
 import android.os.Bundle
+import android.widget.Toast
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,6 @@ import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import android.util.Log
-import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,6 +58,11 @@ class MainActivity : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
+                    productAdapter.setOnItemClickListener(object : onItemListener{
+                        override fun onItemClick(position: Int) {
+
+                        }
+                    })
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
@@ -106,5 +111,5 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
-    }
+    } 
 }
