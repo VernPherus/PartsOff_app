@@ -150,6 +150,8 @@
                 android:layout_height="60dp"
                 android:text="@string/sign_up_button"
                 android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -1,5 +1,6 @@
 package com.dreamdevs.partsoff_app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity<Button> : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
@@ -44,7 +45,27 @@ class MainActivity<Button> : AppCompatActivity() {
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
+
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+            override fun onItemClick(position: Int) {
+                val clickedProduct = productList[position]
+
+                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
+                    putExtra("PRODUCT_TITLE", clickedProduct.title)
+                    putExtra()
+                    putExtra("PRODUCT_PRICE", clickedProduct.price)
+                    putExtra("PRODUCT_QTY", clickedProduct.qty)
+                }
+                startActivity(intent)
+            }
+        })
+        binding.productsRecycler.adapter = productAdapter
     }
+
+    private fun putExtra() {
+
+    }
+
 
     private fun fetchProducts() {
         RetrofitClient.authService.getProducts().enqueue(object : Callback<List<ProductsData>> {
@@ -53,6 +74,11 @@ class MainActivity<Button> : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
+                    productAdapter.setOnItemClickListener(object : onItemListener{
+                        override fun onItemClick(position: Int) {
+
+                        }
+                    })
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
@@ -69,12 +95,26 @@ class MainActivity<Button> : AppCompatActivity() {
 
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
+
         productDataList.forEach { productData ->
-            productList.add(Products(productData.title,
-                productData.description, productData.price.toInt(), productData.qty.toInt()))
+            val quantity = productData.qty.toInt()
+            if (quantity > 0) {
+                productList.add(
+                    Products(
+                        productData.title,
+                        productData.description,
+                        productData.price.toInt(),
+                        quantity
+                    )
+                )
+            }
         }
+
+        productList.reverse()
+
         productAdapter.notifyDataSetChanged()
     }
 
@@ -91,4 +131,5 @@ class MainActivity<Button> : AppCompatActivity() {
             }
         })
     }
+
 }

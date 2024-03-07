@@ -1,11 +1,13 @@
 package com.dreamdevs.partsoff_app.partsOffApi
 
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductDisplayData
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface AuthService {
     @FormUrlEncoded
@@ -27,4 +29,9 @@ interface AuthService {
 
     @GET("displayProducts")
     fun getProducts() : Call<List<ProductsData>>
+
+    @GET("shop-getProduct/{title}")
+    suspend fun getProductData(
+        @Path("title") title: String
+    ) : Call<List<ProductDisplayData>>
 }
