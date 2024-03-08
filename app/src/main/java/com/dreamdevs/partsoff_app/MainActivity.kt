@@ -5,14 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
-import android.util.Log
-import android.widget.Toast
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,7 +38,12 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+
+        binding.cartButton.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
     }
+
 
     private fun setupRecyclerView() {
         binding.productsRecycler.layoutManager = LinearLayoutManager(this)
@@ -52,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
                 val intent = Intent(this@MainActivity, ProductView::class.java).apply {
                     putExtra("PRODUCT_TITLE", clickedProduct.title)
-                    putExtra()
                     putExtra("PRODUCT_PRICE", clickedProduct.price)
                     putExtra("PRODUCT_QTY", clickedProduct.qty)
                 }
@@ -94,7 +98,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
@@ -131,5 +134,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
 }

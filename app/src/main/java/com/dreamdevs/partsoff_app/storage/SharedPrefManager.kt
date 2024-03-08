@@ -6,32 +6,31 @@ import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 
 class SharedPrefManager private constructor(private val mCtx: Context) {
 
+    // Checking for a specific login flag instead of just userEmail existence
     val isLoggedIn: Boolean
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return sharedPreferences.getString("userEmail", null) != null
+            return sharedPreferences.getBoolean("isLoggedIn", false)
         }
 
     val user: LoginRequest
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return LoginRequest(
-                sharedPreferences.getString("userEmail", null).toString(),
-                sharedPreferences.getString("userPassword", null).toString()
+                sharedPreferences.getString("userEmail", "") ?: "",
+                sharedPreferences.getString("userPassword", "") ?: ""
             )
         }
 
-
     fun saveUser(user: LoginRequest) {
-
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
-        editor.putString("userId", user.email)
-        editor.putString("userEmail", user.password)
+        editor.putString("userEmail", user.email)
+        editor.putString("userPassword", user.password)
+        editor.putBoolean("isLoggedIn", true) // Explicitly mark the user as logged in
 
         editor.apply()
-
     }
 
     fun clear() {
@@ -45,6 +44,7 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
         private const val SHARED_PREF_NAME = "userPrefs"
         @SuppressLint("StaticFieldLeak")
         private var mInstance: SharedPrefManager? = null
+
         @Synchronized
         fun getInstance(mCtx: Context): SharedPrefManager {
             if (mInstance == null) {
@@ -53,5 +53,4 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
             return mInstance as SharedPrefManager
         }
     }
-
 }

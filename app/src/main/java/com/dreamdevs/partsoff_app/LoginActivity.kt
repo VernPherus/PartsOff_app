@@ -1,10 +1,11 @@
 package com.dreamdevs.partsoff_app
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
-import android.content.Intent
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
@@ -12,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginActivity(email: String, password: String) : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -60,25 +61,29 @@ class LoginActivity(email: String, password: String) : AppCompatActivity() {
         }
     }
 
-
-
     private fun performLogin(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
         val call = RetrofitClient.authService.login(email, password)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    // Handle successful login, e.g., navigate to main activity
+                    // Assuming you get some user details or token back, save those
+                    // For demonstration, just saving the email and indicating isLoggedIn as true
+                    SharedPrefManager.getInstance(applicationContext).saveUser(LoginRequest(email, password))
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    finish() // Ensure LoginActivity is removed from the back stack
                 } else {
-                    // Handle login error, e.g., display error message
+                    Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                // Handle network error, e.g., display error message
+                Toast.makeText(this@LoginActivity, "Connection Error", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
 }

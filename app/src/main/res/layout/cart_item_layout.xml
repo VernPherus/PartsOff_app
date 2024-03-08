@@ -54,6 +54,7 @@
                     android:id="@+id/decrease_quantity_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
                     android:text="-" />
 
                 <TextView
@@ -69,6 +70,7 @@
                     android:id="@+id/increase_quantity_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
                     android:text="+" />
             </LinearLayout>
         </LinearLayout>
