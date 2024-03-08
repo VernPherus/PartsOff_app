@@ -10,10 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 
 class ProductAdapter(private var productList: ArrayList<Products>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
+
+    interface OnItemListener {
+        fun onItemClick(position : Int)
+    }
 
     var productListFiltered = productList
-    private lateinit var clickListener : onItemListener
+    private lateinit var clickListener: OnItemListener
+
+    fun setOnItemClickListener(listener : OnItemListener){
+        clickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView =
@@ -61,20 +69,17 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
         }
     }
 
-    class ProductViewHolder(itemView: View, listener: onItemListener) : RecyclerView.ViewHolder(itemView) {
+    class ProductViewHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView) {
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
 
         init {
-            itemView.setOnClickListener {
+            itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
             }
         }
     }
 
-    fun setOnItemClickListener(listener: onItemListener){
-        clickListener = listener
-    }
 }

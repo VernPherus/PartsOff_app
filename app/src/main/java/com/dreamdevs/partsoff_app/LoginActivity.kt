@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
 import android.content.Intent
+import android.widget.Toast
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
@@ -70,12 +71,12 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-                    // Handle login error, e.g., display error message
+                    Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                // Handle network error, e.g., display error message
+                Toast.makeText(this@LoginActivity, "Connection Error", Toast.LENGTH_SHORT).show()
             }
         })
     }
