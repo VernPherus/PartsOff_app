@@ -1,6 +1,7 @@
 package com.dreamdevs.partsoff_app
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dreamdevs.partsoff_app.databinding.ActivityProductViewBinding
@@ -25,5 +26,10 @@ class ProductView : AppCompatActivity() {
         binding.productDesc.text = desc
         binding.itemPrice.text = "₱ $price"
         binding.itemQty.text = qty
+
+        binding.backButton.setOnClickListener {
+            val intent = Intent(this@ProductView, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
