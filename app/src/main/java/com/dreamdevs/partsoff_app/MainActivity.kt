@@ -1,6 +1,5 @@
 package com.dreamdevs.partsoff_app
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -42,6 +41,19 @@ class MainActivity : AppCompatActivity() {
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
+        setupRefreshButton()
+    }
+
+    private fun scrollToTop() {
+        binding.productsRecycler.scrollToPosition(0)
+    }
+
+    private fun setupRefreshButton() {
+        binding.refreshButton.setOnClickListener {
+            // Handle refresh button click
+            fetchProducts()
+            scrollToTop()
+        }
     }
 
 
@@ -78,11 +90,15 @@ class MainActivity : AppCompatActivity() {
                     val productListData = response.body() ?: return
 
                     updateRecyclerView(productListData)
-                    productAdapter.setOnItemClickListener(object : onItemListener{
-                        override fun onItemClick(position: Int) {
 
+                    productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+                        override fun onItemClick(position: Int) {
+                            val intent = Intent(this@MainActivity, ProductView::class.java)
+                            intent.putExtra("title", productList[position].title)
+                            startActivity(intent)
                         }
                     })
+
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@MainActivity, "Failed to fetch products. Please try again.", Toast.LENGTH_LONG).show()
@@ -97,8 +113,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
 

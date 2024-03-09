@@ -10,21 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 
 class ProductAdapter(private var productList: List<Products>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
+
+    interface OnItemListener {
+        fun onItemClick(position : Int)
+    }
 
     var productListFiltered = productList
-    interface OnItemListener {
-        fun onItemClick(position: Int)
-    }
-    fun setOnItemClickListener(listener: OnItemListener) {
-        this.clickListener = listener
+    private lateinit var clickListener: OnItemListener
+
+    fun setOnItemClickListener(listener : OnItemListener){
+        clickListener = listener
     }
 
-    private lateinit var clickListener: OnItemListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.list_product, parent, false)
-        return ProductViewHolder(itemView)
+        return ProductViewHolder(itemView, clickListener)
     }
 
     override fun getItemCount(): Int {
@@ -37,10 +39,6 @@ class ProductAdapter(private var productList: List<Products>) :
         holder.productDesc.text = currentItem.description.toString()
         holder.productPrice.text = currentItem.price.toString()
         holder.productQty.text = currentItem.qty.toString()
-
-        holder.itemView.setOnClickListener {
-            clickListener.onItemClick(position)
-        }
     }
 
     override fun getFilter(): Filter {
@@ -71,21 +69,18 @@ class ProductAdapter(private var productList: List<Products>) :
         }
     }
 
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ProductViewHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView) {
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
-
         init {
-            itemView.setOnClickListener {
-               // clickListener.onItemClick(adapterPosition)
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
             }
         }
     }
 
-    fun setOnItemClickListener(listener: onItemListener) {
-        this.clickListener = listener
-    }
+
 
 }

@@ -37,15 +37,6 @@ class CartActivity : AppCompatActivity() {
         RetrofitClient.authService.getProducts().enqueue()
     }
 
-    private fun updateRecyclerView() {
-        (cartItemsRecyclerView.adapter as? ProductAdapter)?.apply {
-            updateData()
-        }
-    }
-
-    private fun updateData() {
-        TODO("Not yet implemented")
-    }
 
     private fun setupCheckoutButton() {
         checkoutButton.setOnClickListener {
