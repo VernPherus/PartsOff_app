@@ -53,5 +53,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="credit_card">Credit Card</string>
     <string name="paypal">PayPal</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="back">Back</string>
 
 </resources>

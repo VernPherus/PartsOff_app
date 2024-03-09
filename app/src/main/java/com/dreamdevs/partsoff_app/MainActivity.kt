@@ -95,6 +95,11 @@ class MainActivity : AppCompatActivity() {
                         override fun onItemClick(position: Int) {
                             val intent = Intent(this@MainActivity, ProductView::class.java)
                             intent.putExtra("title", productList[position].title)
+                            intent.putExtra("description", productList[position].description.toString())
+                            intent.putExtra("price", productList[position].price.toString())
+                            intent.putExtra("qty", productList[position].qty.toString())
+
+
                             startActivity(intent)
                         }
                     })

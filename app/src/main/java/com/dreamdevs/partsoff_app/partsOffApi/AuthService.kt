@@ -31,7 +31,7 @@ interface AuthService {
     fun getProducts() : Call<List<ProductsData>>
 
     @GET("shop-getProduct/{title}")
-    suspend fun getProductData(
+    fun getProductData(
         @Path("title") title: String
     ) : Call<List<ProductDisplayData>>
 }
