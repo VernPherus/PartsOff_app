@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductView">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:background="@color/primary"
+                android:src="@drawable/baseline_arrow_back_24"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/back"/>
+
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="23dp"
+                android:layout_toStartOf="@+id/profileButton"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cart"
+                android:src="@drawable/cart_icon"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/cartQuantityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cartButton"
+                android:layout_alignEnd="@id/cartButton"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="-8dp"
+                android:gravity="center"
+                android:minWidth="20dp"
+                android:minHeight="20dp"
+                android:padding="4dp"
+                android:text="@string/_0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#F3E5F5" />
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/profile_icon"
+                tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nested_constraint"
+        android:layout_width="410dp"
+        android:layout_height="593dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/product_disp"
+            android:layout_width="match_parent"
+            android:layout_height="236dp"
+            android:contentDescription="@string/item_1_description"
+            android:src="@drawable/gpu_gtx1660super"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/productTitle"
+            android:layout_width="377dp"
+            android:layout_height="41dp"
+            android:text="@string/product_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_disp" />
+
+        <TextView
+            android:id="@+id/textPriceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/price"
+            app:layout_constraintStart_toStartOf="@+id/productTitle"
+            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
+
+        <TextView
+            android:id="@+id/textQTYLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qty"
+            app:layout_constraintStart_toStartOf="@+id/textPriceLabel"
+            app:layout_constraintTop_toBottomOf="@+id/textPriceLabel" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="49dp"
+            android:layout_height="19dp"
+            android:text="@string/price_placeholder"
+            app:layout_constraintStart_toEndOf="@+id/textPriceLabel"
+            app:layout_constraintTop_toTopOf="@+id/textPriceLabel" />
+
+        <TextView
+            android:id="@+id/itemQty"
+            android:layout_width="35dp"
+            android:layout_height="19dp"
+            android:text="@string/_0"
+            app:layout_constraintStart_toEndOf="@+id/textQTYLabel"
+            app:layout_constraintTop_toTopOf="@+id/textQTYLabel" />
+
+        <TextView
+            android:id="@+id/productDesc"
+            android:scrollbars="vertical"
+            android:layout_width="370dp"
+            android:layout_height="262dp"
+            android:layout_marginTop="56dp"
+            android:text="@string/sample_description"
+            app:layout_constraintEnd_toEndOf="@+id/productTitle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/productTitle"
+            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nested_constraint"
+        app:layout_constraintStart_toStartOf="@+id/nested_constraint"
+        app:layout_constraintTop_toBottomOf="@+id/nested_constraint">
+
+        <Button
+            android:id="@+id/checkout_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:text="@string/checkout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/add_to_cart"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:text="@string/add_to_cart"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="648dp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
