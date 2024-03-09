@@ -162,7 +162,7 @@
             app:layout_constraintStart_toEndOf="@+id/textQTYLabel"
             app:layout_constraintTop_toTopOf="@+id/textQTYLabel" />
 
-        <TextureView
+        <TextView
             android:id="@+id/productDesc"
             android:layout_width="370dp"
             android:layout_height="262dp"
