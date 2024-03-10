@@ -25,6 +25,7 @@ class ProductView : AppCompatActivity() {
         val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
+
         binding.productTitle.text = title
         binding.productDesc.text = desc
         binding.itemPrice.text = "₱ $price"
@@ -32,7 +33,7 @@ class ProductView : AppCompatActivity() {
 
         imageUrl?.let {
             Glide.with(this@ProductView)
-                .load("http://64.23.185.162/uploads/product/small/$it")
+                .load("http://64.23.185.162/uploads/product/large/$it")
                 .into(binding.productDisp)
         }
 

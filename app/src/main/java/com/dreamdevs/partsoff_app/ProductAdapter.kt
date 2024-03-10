@@ -45,7 +45,7 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         val imageUrl = currentItem.productImages.firstOrNull()?.image
         imageUrl?.let {
             Glide.with(holder.itemView.context)
-                .load("http://64.23.185.162/uploads/product/small/$it")
+                .load("http://64.23.185.162/uploads/product/large/$it")
                 .into(holder.productImageView)
         }
     }
