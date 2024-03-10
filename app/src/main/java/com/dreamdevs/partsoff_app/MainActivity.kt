@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,11 +43,9 @@ class MainActivity : AppCompatActivity() {
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
+
         setupRefreshButton()
 
-        binding.profileButton.setOnClickListener {
-            startActivity(Intent(this@MainActivity, UserProfile::class.java))
-        }
     }
 
     private fun scrollToTop() {
