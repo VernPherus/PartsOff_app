@@ -41,6 +41,7 @@
     <string name="product_title">Product Title</string>
     <string name="price_placeholder">₱0.00</string>
     <string name="qty">QTY:</string>
+    <string name="qty_placeholder">2</string>
     <string name="price">Price:</string>
     <string name="sample_description">Sample description</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -55,5 +56,10 @@
     <string name="paypal">PayPal</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="back">Back</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="cash_on_delivery_desc">Please prepare payment upon delivery</string>
+    <string name="total">Total:</string>
+    <string name="customer_details">Customer Details</string>
 
 </resources>

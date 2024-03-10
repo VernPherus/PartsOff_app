@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,65 +8,158 @@
     android:padding="16dp"
     tools:context=".CheckoutActivity">
 
-    <TextView
-        android:id="@+id/textViewOrderSummary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Order Summary"
-        android:textAppearance="?attr/textAppearanceHeadline6" />
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="40dp"
+        android:layout_height="31dp"
+        android:background="@color/white"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/back" />
 
-    <!-- Input for First Name -->
-    <EditText
-        android:id="@+id/editTextFirstName"
+    <LinearLayout
+        android:id="@+id/order_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/first_name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:importantForAutofill="no" />
+        android:layout_marginTop="52dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Input for Last Name -->
-    <EditText
-        android:id="@+id/editTextLastName"
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewOrderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_summary"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="60dp"
+                tools:layout_editor_absoluteY="88dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qty" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/total" />
+
+            <TextView
+                android:id="@+id/total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_placeholder" />
+
+            <TextView
+                android:id="@+id/total_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qty_placeholder" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/last_name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:layout_editor_absoluteX="-10dp">
 
-    <!-- Input for Address -->
-    <EditText
-        android:id="@+id/editTextAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/shipping_address"
-        android:inputType="textPostalAddress"
-        android:minHeight="48dp"
-        android:importantForAutofill="no" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_details"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
-    <!-- Input for Phone Number -->
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/phone_number"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        android:autofillHints="" />
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="117dp"
+            tools:layout_editor_absoluteY="16dp" />
 
-    <!-- Payment Options Heading -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Payment Options"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="64dp" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/shipping_address"
+            android:importantForAutofill="no"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="128dp" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="192dp" />
+
+    </LinearLayout>
 
     <!-- Confirm Order Button -->
+
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/checkout_form"
+        app:layout_constraintEnd_toEndOf="@+id/checkout_form"
+        app:layout_constraintStart_toStartOf="@+id/checkout_form">
 
         <!-- Payment Option 1 - Example -->
         <RadioButton
@@ -75,25 +168,44 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:minHeight="48dp"
-            android:text="@string/credit_card" />
+            android:text="@string/cash_on_delivery" />
 
-        <!-- Payment Option 2 - Example -->
-        <RadioButton
-            android:id="@+id/radioButtonPayPal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:text="@string/paypal" />
 
     </RadioGroup>
+
+
+    <LinearLayout
+        android:id="@+id/checkout_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmOrder"
+        app:layout_constraintEnd_toEndOf="@+id/buttonConfirmOrder"
+        app:layout_constraintStart_toStartOf="@+id/buttonConfirmOrder">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_on_delivery"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_on_delivery_desc" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonConfirmOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg"
         android:text="@string/confirm_order"
         android:textColor="@color/white"
-        android:background="@drawable/bg"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
