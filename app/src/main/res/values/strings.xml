@@ -12,6 +12,7 @@
     <string name="todo">TODO</string>
     <string name="login">LOGIN</string>
     <string name="email">Email</string>
+    <string name="email2">Email: </string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_cart">Cart</string>
@@ -62,5 +63,8 @@
     <string name="total">Total:</string>
     <string name="customer_details">Customer Details</string>
     <string name="log_out">Log out</string>
+    <string name="placeholder_email">example@web.com</string>
+    <string name="refresh">Refresh</string>
+    <string name="for_you">For You!</string>
 
 </resources>

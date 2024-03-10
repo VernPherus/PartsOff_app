@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.widget.PopupMenu
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.account.LoginActivity
@@ -30,14 +34,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         if (!SharedPrefManager.getInstance(applicationContext).isLoggedIn) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        popupMenu()
         setupRecyclerView()
         fetchProducts()
         setupSearch()
@@ -62,12 +65,9 @@ class MainActivity : AppCompatActivity() {
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
+
         setupRefreshButton()
 
-        binding.profileButton.setOnClickListener {
-            val toProfile = Intent(this@MainActivity, UserProfile::class.java)
-            startActivity(toProfile)
-        }
     }
 
     private fun scrollToTop() {
@@ -152,6 +152,43 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
+    }
+
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun popupMenu(){
+        val popupMenu = PopupMenu(applicationContext, binding.profileButton)
+        popupMenu.inflate(R.menu.profile_menu)
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.user_email -> {
+                    Toast.makeText(applicationContext, "Share pressed", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.logout_button -> {
+                    Toast.makeText(applicationContext, "logout pressed", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> true
+            }
+        }
+
+        binding.profileButton.setOnClickListener {
+
+            try {
+                val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+                popup.isAccessible = true
+                val menu = popup.get(popupMenu)
+                menu.javaClass
+                    .getDeclaredMethod("setForcedShowIcon", Boolean::class.java)
+                    .invoke(menu, true)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }finally {
+                popupMenu.show()
+            }
+
+            true
+        }
     }
 
 
