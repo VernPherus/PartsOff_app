@@ -1,6 +1,5 @@
 package com.dreamdevs.partsoff_app.partsOffApi
 
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductDisplayData
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import retrofit2.Call
 import retrofit2.http.Field
@@ -30,8 +29,4 @@ interface AuthService {
     @GET("displayProducts")
     fun getProducts() : Call<List<ProductsData>>
 
-    @GET("shop-getProduct/{title}")
-    fun getProductData(
-        @Path("title") title: String
-    ) : Call<List<ProductDisplayData>>
 }

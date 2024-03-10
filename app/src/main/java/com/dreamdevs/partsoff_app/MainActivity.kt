@@ -10,9 +10,10 @@ import android.view.MenuInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dreamdevs.partsoff_app.account.LoginActivity
+import com.dreamdevs.partsoff_app.account.UserProfile
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
@@ -23,12 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
-    private var productList: ArrayList<Products> = ArrayList()
+    private var productList: ArrayList<ProductsData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         if (!SharedPrefManager.getInstance(applicationContext).isLoggedIn) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -39,6 +42,23 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+            override fun onItemClick(position: Int) {
+                val clickedProduct = productAdapter.productListFiltered[position]
+
+                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
+                    putExtra("id", clickedProduct.id)
+                    putExtra("title", clickedProduct.title)
+                    putExtra("description", clickedProduct.description.toString())
+                    putExtra("price", clickedProduct.price.toString())
+                    putExtra("qty", clickedProduct.qty.toString())
+                    putExtra("image", clickedProduct.productImages.firstOrNull()?.image)
+                }
+                startActivity(intent)
+
+            }
+        })
 
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
@@ -66,24 +86,6 @@ class MainActivity : AppCompatActivity() {
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
-
-        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
-            override fun onItemClick(position: Int) {
-                val clickedProduct = productList[position]
-
-                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
-                    putExtra("PRODUCT_TITLE", clickedProduct.title)
-                    putExtra("PRODUCT_PRICE", clickedProduct.price)
-                    putExtra("PRODUCT_QTY", clickedProduct.qty)
-                }
-                startActivity(intent)
-            }
-        })
-        binding.productsRecycler.adapter = productAdapter
-    }
-
-    private fun putExtra() {
-
     }
 
 
@@ -95,19 +97,6 @@ class MainActivity : AppCompatActivity() {
 
                     updateRecyclerView(productListData)
 
-                    productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
-                        override fun onItemClick(position: Int) {
-                            val intent = Intent(this@MainActivity, ProductView::class.java)
-                            intent.putExtra("id", productList[position].id)
-                            intent.putExtra("title", productList[position].title)
-                            intent.putExtra("description", productList[position].description.toString())
-                            intent.putExtra("price", productList[position].price.toString())
-                            intent.putExtra("qty", productList[position].qty.toString())
-
-
-                            startActivity(intent)
-                        }
-                    })
 
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
@@ -130,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             val quantity = productData.qty.toInt()
             if (quantity > 0) {
                 productList.add(
-                    Products(
+                    ProductsData(
                         productData.id,
                         productData.title,
                         productData.description,

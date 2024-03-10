@@ -5,21 +5,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
+import com.bumptech.glide.Glide
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 
-class ProductAdapter(private var productList: List<Products>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
+class ProductAdapter(private var productList: List<ProductsData>) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
     interface OnItemListener {
-        fun onItemClick(position : Int)
+        fun onItemClick(position: Int)
     }
 
     var productListFiltered = productList
     private lateinit var clickListener: OnItemListener
 
-    fun setOnItemClickListener(listener : OnItemListener){
+    fun setOnItemClickListener(listener: OnItemListener) {
         clickListener = listener
     }
 
@@ -40,6 +42,12 @@ class ProductAdapter(private var productList: List<Products>) :
         holder.productDesc.text = currentItem.description.toString()
         holder.productPrice.text = currentItem.price.toString()
         holder.productQty.text = currentItem.qty.toString()
+        val imageUrl = currentItem.productImages.firstOrNull()?.image
+        imageUrl?.let {
+            Glide.with(holder.itemView.context)
+                .load("http://64.23.185.162/uploads/product/large/$it")
+                .into(holder.productImageView)
+        }
     }
 
     override fun getFilter(): Filter {
@@ -49,7 +57,7 @@ class ProductAdapter(private var productList: List<Products>) :
                 productListFiltered = if (charSearch.isEmpty()) {
                     productList
                 } else {
-                    val resultList = ArrayList<Products>()
+                    val resultList = ArrayList<ProductsData>()
                     for (row in productList) {
                         if (row.title!!.contains(charSearch, true)) {
                             resultList.add(row)
@@ -64,7 +72,7 @@ class ProductAdapter(private var productList: List<Products>) :
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                productListFiltered = results?.values as ArrayList<Products>
+                productListFiltered = results?.values as ArrayList<ProductsData>
                 notifyDataSetChanged()
             }
         }
@@ -76,13 +84,15 @@ class ProductAdapter(private var productList: List<Products>) :
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
+        val productImageView: ImageView = itemView.findViewById(R.id.product_image)
+
         init {
-            itemView.setOnClickListener{
-                listener.onItemClick(adapterPosition)
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(position)
+                }
             }
         }
     }
-
-
-
 }
