@@ -28,8 +28,7 @@ class ProductView : AppCompatActivity() {
         binding.itemQty.text = qty
 
         binding.backButton.setOnClickListener {
-            val intent = Intent(this@ProductView, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@ProductView, MainActivity::class.java))
         }
     }
 }

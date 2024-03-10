@@ -44,8 +44,7 @@ class MainActivity : AppCompatActivity() {
         setupRefreshButton()
 
         binding.profileButton.setOnClickListener {
-            val toProfile = Intent(this@MainActivity, UserProfile::class.java)
-            startActivity(toProfile)
+            startActivity(Intent(this@MainActivity, UserProfile::class.java))
         }
     }
 

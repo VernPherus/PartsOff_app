@@ -16,8 +16,7 @@ class UserProfile : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.backButton.setOnClickListener {
-            val intent = Intent(this@UserProfile, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@UserProfile, MainActivity::class.java))
         }
 
         binding.logoutButton.setOnClickListener {
@@ -27,7 +26,6 @@ class UserProfile : AppCompatActivity() {
 
     private fun logout(){
         SharedPrefManager.getInstance(applicationContext).clear()
-        val intent = Intent(this@UserProfile, LoginActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this@UserProfile, LoginActivity::class.java))
     }
 }
