@@ -35,6 +35,7 @@ class ProductAdapter(private var productList: List<Products>) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItem = productListFiltered[position]
+        holder.productId.text = currentItem.id.toString()
         holder.productTitle.text = currentItem.title
         holder.productDesc.text = currentItem.description.toString()
         holder.productPrice.text = currentItem.price.toString()
@@ -70,6 +71,7 @@ class ProductAdapter(private var productList: List<Products>) :
     }
 
     class ProductViewHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView) {
+        val productId: TextView = itemView.findViewById(R.id.product_id)
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
