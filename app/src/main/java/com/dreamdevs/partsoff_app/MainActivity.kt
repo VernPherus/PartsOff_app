@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
-    private var productList: ArrayList<Products> = ArrayList()
+    private var productList: ArrayList<ProductsData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
+
 
         productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
             override fun onItemClick(position: Int) {
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             val quantity = productData.qty.toInt()
             if (quantity > 0) {
                 productList.add(
-                    Products(
+                    ProductsData(
                         productData.id,
                         productData.title,
                         productData.description,

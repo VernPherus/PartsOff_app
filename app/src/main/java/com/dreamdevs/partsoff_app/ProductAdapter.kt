@@ -7,9 +7,9 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 
-class ProductAdapter(private var productList: List<Products>) :
+class ProductAdapter(private var productList: List<ProductsData>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
 
     interface OnItemListener {
@@ -49,7 +49,7 @@ class ProductAdapter(private var productList: List<Products>) :
                 productListFiltered = if (charSearch.isEmpty()) {
                     productList
                 } else {
-                    val resultList = ArrayList<Products>()
+                    val resultList = ArrayList<ProductsData>()
                     for (row in productList) {
                         if (row.title!!.contains(charSearch, true)) {
                             resultList.add(row)
@@ -64,7 +64,7 @@ class ProductAdapter(private var productList: List<Products>) :
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                productListFiltered = results?.values as ArrayList<Products>
+                productListFiltered = results?.values as ArrayList<ProductsData>
                 notifyDataSetChanged()
             }
         }
