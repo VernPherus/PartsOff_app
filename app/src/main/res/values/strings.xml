@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Parts Off</string>
     <string name="placeholdertxt">Lorem ipsum dolor</string>
     <string name="sign_up">Sign Up</string>
     <string name="email_hint">Email</string>

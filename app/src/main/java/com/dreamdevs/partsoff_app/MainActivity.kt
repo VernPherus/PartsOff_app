@@ -78,10 +78,6 @@ class MainActivity : AppCompatActivity() {
         binding.productsRecycler.adapter = productAdapter
     }
 
-    private fun putExtra() {
-
-    }
-
 
     private fun fetchProducts() {
         RetrofitClient.authService.getProducts().enqueue(object : Callback<List<ProductsData>> {
