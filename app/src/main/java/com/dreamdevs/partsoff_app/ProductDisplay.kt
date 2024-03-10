@@ -1,6 +1,5 @@
-package com.dreamdevs.partsoff_app;
+package com.dreamdevs.partsoff_app
 
-import android.app.Activity;
+import android.app.Activity
 
-public class ProductDisplay extends Activity {
-}
+class ProductDisplay : Activity()

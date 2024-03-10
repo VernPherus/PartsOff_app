@@ -33,37 +33,37 @@ class ProductView : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.addToCart.setOnClickListener {
-            // Get the existing cart data from SharedPreferences
-            val sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE)
-            val cartId = sharedPreferences.getString("id", "")
-            val cartTitle = sharedPreferences.getString("title", "")
-            val cartDesc = sharedPreferences.getString("description", "")
-            val cartPrice = sharedPreferences.getString("price", "")
-
-            // Get the current product details
-            val currentId = productId
-            val currentTitle = title
-            val currentDesc = desc
-            val currentPrice = price
-
-            // Concatenate the current product details with existing cart data
-            val updatedCartId = if (cartId.isNullOrEmpty()) currentId.toString() else "$cartId, $currentId"
-            val updatedCartTitle = if (cartTitle.isNullOrEmpty()) currentTitle else "$cartTitle, $currentTitle"
-            val updatedCartDesc = if (cartDesc.isNullOrEmpty()) currentDesc else "$cartDesc, $currentDesc"
-            val updatedCartPrice = if (cartPrice.isNullOrEmpty()) currentPrice else "$cartPrice, $currentPrice"
-
-            // Save the updated cart data to SharedPreferences
-            val editor = sharedPreferences.edit()
-            editor.putString("id", updatedCartId)
-            editor.putString("title", updatedCartTitle)
-            editor.putString("description", updatedCartDesc)
-            editor.putString("price", updatedCartPrice)
-            editor.apply()
-
-            // Navigate to the Cart activity
-            val intent = Intent(this@ProductView, CartActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.addToCart.setOnClickListener {
+//            // Get the existing cart data from SharedPreferences
+//            val sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE)
+//            val cartId = sharedPreferences.getString("id", "")
+//            val cartTitle = sharedPreferences.getString("title", "")
+//            val cartDesc = sharedPreferences.getString("description", "")
+//            val cartPrice = sharedPreferences.getString("price", "")
+//
+//            // Get the current product details
+//            val currentId = productId
+//            val currentTitle = title
+//            val currentDesc = desc
+//            val currentPrice = price
+//
+//            // Concatenate the current product details with existing cart data
+//            val updatedCartId = if (cartId.isNullOrEmpty()) currentId.toString() else "$cartId, $currentId"
+//            val updatedCartTitle = if (cartTitle.isNullOrEmpty()) currentTitle else "$cartTitle, $currentTitle"
+//            val updatedCartDesc = if (cartDesc.isNullOrEmpty()) currentDesc else "$cartDesc, $currentDesc"
+//            val updatedCartPrice = if (cartPrice.isNullOrEmpty()) currentPrice else "$cartPrice, $currentPrice"
+//
+//            // Save the updated cart data to SharedPreferences
+//            val editor = sharedPreferences.edit()
+//            editor.putString("id", updatedCartId)
+//            editor.putString("title", updatedCartTitle)
+//            editor.putString("description", updatedCartDesc)
+//            editor.putString("price", updatedCartPrice)
+//            editor.apply()
+//
+//            // Navigate to the Cart activity
+//            val intent = Intent(this@ProductView, CartActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

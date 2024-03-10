@@ -12,6 +12,6 @@
         tools:layout="@layout/activity_login" />
     <activity
         android:id="@+id/signUpActivity"
-        android:name="com.dreamdevs.partsoff_app.SignUpActivity"
+        android:name="com.dreamdevs.partsoff_app.account.SignUpActivity"
         android:label="SignUpActivity" />
 </navigation>

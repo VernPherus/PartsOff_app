@@ -8,10 +8,9 @@ data class ProductsData(
     @SerializedName("description") val description: String,
     @SerializedName("price") val price: Int, // Change type to Int for price
     @SerializedName("qty") val qty: Int, // Change type to Int for qty
-    @SerializedName("product_images") val productImages: List<ProductImage>
+    @SerializedName("product_images") val productImages: List<ProductImage>,
 )
 
 data class ProductImage(
     @SerializedName("image")val image: String
-
 )

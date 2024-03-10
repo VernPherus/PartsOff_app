@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 
 class ProductAdapter(private var productList: List<ProductsData>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
     interface OnItemListener {
-        fun onItemClick(position : Int)
+        fun onItemClick(position: Int)
     }
 
     var productListFiltered = productList
     private lateinit var clickListener: OnItemListener
 
-    fun setOnItemClickListener(listener : OnItemListener){
+    fun setOnItemClickListener(listener: OnItemListener) {
         clickListener = listener
     }
 
@@ -40,6 +40,7 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         holder.productDesc.text = currentItem.description.toString()
         holder.productPrice.text = currentItem.price.toString()
         holder.productQty.text = currentItem.qty.toString()
+        holder.productImages.text = currentItem.productImages.toString()
     }
 
     override fun getFilter(): Filter {
@@ -76,13 +77,15 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
+        val productImages: TextView = itemView.findViewById(R.id.product_image)
+
         init {
-            itemView.setOnClickListener{
-                listener.onItemClick(adapterPosition)
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(position)
+                }
             }
         }
     }
-
-
-
 }
