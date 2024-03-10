@@ -1,5 +1,6 @@
 package com.dreamdevs.partsoff_app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -113,6 +114,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
 
