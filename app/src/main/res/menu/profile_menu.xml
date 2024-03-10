@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/user_email"
+    <item
+        android:id="@+id/user_email"
         android:icon="@drawable/profile_icon"
-        android:title="@string/placeholder_email"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/placeholder_email" />
 
-    <item android:id="@+id/logout_action"
-        android:title="@string/log_out"
-        app:showAsAction="never"/>
+    <item
+        android:id="@+id/logout_action"
+        android:title="@string/log_out"/>
 
 </menu>
