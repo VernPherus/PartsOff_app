@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                     productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
                         override fun onItemClick(position: Int) {
                             val intent = Intent(this@MainActivity, ProductView::class.java)
+                            intent.putExtra("id", productList[position].id)
                             intent.putExtra("title", productList[position].title)
                             intent.putExtra("description", productList[position].description.toString())
                             intent.putExtra("price", productList[position].price.toString())
@@ -130,10 +131,13 @@ class MainActivity : AppCompatActivity() {
             if (quantity > 0) {
                 productList.add(
                     Products(
+                        productData.id,
                         productData.title,
                         productData.description,
                         productData.price.toInt(),
-                        quantity
+                        quantity,
+                        productData.productImages,
+
                     )
                 )
             }
