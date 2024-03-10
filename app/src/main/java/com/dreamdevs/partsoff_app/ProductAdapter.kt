@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 
-class ProductAdapter(private var productList: ArrayList<Products>) :
+class ProductAdapter(private var productList: List<Products>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
 
     interface OnItemListener {
@@ -74,12 +74,13 @@ class ProductAdapter(private var productList: ArrayList<Products>) :
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
-
         init {
             itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
             }
         }
     }
+
+
 
 }

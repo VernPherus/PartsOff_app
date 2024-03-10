@@ -10,7 +10,7 @@
     <string name="home">Home</string>
     <string name="categories">Categories</string>
     <string name="todo">TODO</string>
-    <string name="login">Login</string>
+    <string name="login">LOGIN</string>
     <string name="email">Email</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
@@ -41,10 +41,26 @@
     <string name="product_title">Product Title</string>
     <string name="price_placeholder">₱0.00</string>
     <string name="qty">QTY:</string>
+    <string name="qty_placeholder">2</string>
     <string name="price">Price:</string>
     <string name="sample_description">Sample description</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_product_display">ProductDisplay</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="paypal">PayPal</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="back">Back</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="cash_on_delivery_desc">Please prepare payment upon delivery</string>
+    <string name="total">Total:</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="log_out">Log out</string>
 
 </resources>

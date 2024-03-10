@@ -2,16 +2,17 @@ package com.dreamdevs.partsoff_app
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
-import android.util.Log
+import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,10 +28,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (!SharedPrefManager.getInstance(applicationContext).isLoggedIn) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+
+        binding.cartButton.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
         setupRefreshButton()
+
+        binding.profileButton.setOnClickListener {
+            val toProfile = Intent(this@MainActivity, UserProfile::class.java)
+            startActivity(toProfile)
+        }
     }
 
     private fun scrollToTop() {
@@ -45,12 +61,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setupRecyclerView() {
         binding.productsRecycler.layoutManager = LinearLayoutManager(this)
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
+
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+            override fun onItemClick(position: Int) {
+                val clickedProduct = productList[position]
+
+                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
+                    putExtra("PRODUCT_TITLE", clickedProduct.title)
+                    putExtra("PRODUCT_PRICE", clickedProduct.price)
+                    putExtra("PRODUCT_QTY", clickedProduct.qty)
+                }
+                startActivity(intent)
+            }
+        })
+        binding.productsRecycler.adapter = productAdapter
     }
+
+    private fun putExtra() {
+
+    }
+
 
     private fun fetchProducts() {
         RetrofitClient.authService.getProducts().enqueue(object : Callback<List<ProductsData>> {
@@ -64,6 +100,11 @@ class MainActivity : AppCompatActivity() {
                         override fun onItemClick(position: Int) {
                             val intent = Intent(this@MainActivity, ProductView::class.java)
                             intent.putExtra("title", productList[position].title)
+                            intent.putExtra("description", productList[position].description.toString())
+                            intent.putExtra("price", productList[position].price.toString())
+                            intent.putExtra("qty", productList[position].qty.toString())
+
+
                             startActivity(intent)
                         }
                     })
@@ -119,5 +160,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
-    } 
+    }
+
+
 }

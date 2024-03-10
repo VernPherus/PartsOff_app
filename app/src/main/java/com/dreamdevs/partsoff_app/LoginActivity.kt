@@ -1,11 +1,11 @@
 package com.dreamdevs.partsoff_app
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
-import android.content.Intent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
@@ -67,9 +67,14 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    // Handle successful login, e.g., navigate to main activity
+                    // Assuming you get some user details or token back, save those
+                    // For demonstration, just saving the email and indicating isLoggedIn as true
+                    SharedPrefManager.getInstance(applicationContext).saveUser(LoginRequest(email, password))
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    finish() // Ensure LoginActivity is removed from the back stack
                 } else {
                     Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                 }

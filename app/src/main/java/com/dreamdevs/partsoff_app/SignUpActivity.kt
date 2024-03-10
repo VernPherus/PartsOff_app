@@ -2,13 +2,11 @@ package com.dreamdevs.partsoff_app
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.dreamdevs.partsoff_app.databinding.ActivitySignUpBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterRequest
-import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

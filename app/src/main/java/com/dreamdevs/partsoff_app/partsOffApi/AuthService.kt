@@ -8,7 +8,6 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface AuthService {
     @FormUrlEncoded
@@ -32,7 +31,7 @@ interface AuthService {
     fun getProducts() : Call<List<ProductsData>>
 
     @GET("shop-getProduct/{title}")
-    suspend fun getProductData(
+    fun getProductData(
         @Path("title") title: String
     ) : Call<List<ProductDisplayData>>
 }
