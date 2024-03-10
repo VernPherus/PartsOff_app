@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CartActivity::class.java))
         }
         setupRefreshButton()
+
+        binding.profileButton.setOnClickListener {
+            val toProfile = Intent(this@MainActivity, UserProfile::class.java)
+            startActivity(toProfile)
+        }
     }
 
     private fun scrollToTop() {

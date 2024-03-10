@@ -21,7 +21,13 @@ class UserProfile : AppCompatActivity() {
         }
 
         binding.logoutButton.setOnClickListener {
-            SharedPrefManager.getInstance(applicationContext)
+            logout()
         }
+    }
+
+    private fun logout(){
+        SharedPrefManager.getInstance(applicationContext).clear()
+        val intent = Intent(this@UserProfile, LoginActivity::class.java)
+        startActivity(intent)
     }
 }
