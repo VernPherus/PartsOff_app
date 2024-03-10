@@ -51,9 +51,10 @@ class MainActivity : AppCompatActivity() {
                     putExtra("description", clickedProduct.description.toString())
                     putExtra("price", clickedProduct.price.toString())
                     putExtra("qty", clickedProduct.qty.toString())
+                    putExtra("image", clickedProduct.productImages.firstOrNull()?.image)
                 }
-
                 startActivity(intent)
+
             }
         })
 
@@ -86,25 +87,6 @@ class MainActivity : AppCompatActivity() {
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
-
-
-        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
-            override fun onItemClick(position: Int) {
-                val clickedProduct = productList[position]
-
-                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
-                    putExtra("PRODUCT_TITLE", clickedProduct.title)
-                    putExtra("PRODUCT_PRICE", clickedProduct.price)
-                    putExtra("PRODUCT_QTY", clickedProduct.qty)
-                }
-                startActivity(intent)
-            }
-        })
-        binding.productsRecycler.adapter = productAdapter
-    }
-
-    private fun putExtra() {
-
     }
 
 

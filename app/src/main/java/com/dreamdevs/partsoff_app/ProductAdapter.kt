@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 
 class ProductAdapter(private var productList: List<ProductsData>) :
@@ -40,7 +42,12 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         holder.productDesc.text = currentItem.description.toString()
         holder.productPrice.text = currentItem.price.toString()
         holder.productQty.text = currentItem.qty.toString()
-        holder.productImages.text = currentItem.productImages.toString()
+        val imageUrl = currentItem.productImages.firstOrNull()?.image
+        imageUrl?.let {
+            Glide.with(holder.itemView.context)
+                .load("http://64.23.185.162/uploads/product/small/$it")
+                .into(holder.productImageView)
+        }
     }
 
     override fun getFilter(): Filter {
@@ -77,7 +84,7 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         val productDesc: TextView = itemView.findViewById(R.id.product_desc)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productQty: TextView = itemView.findViewById(R.id.product_qty)
-        val productImages: TextView = itemView.findViewById(R.id.product_image)
+        val productImageView: ImageView = itemView.findViewById(R.id.product_image)
 
         init {
             itemView.setOnClickListener {

@@ -87,9 +87,9 @@
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:contentDescription="@string/item_1_description"
-            android:src="@drawable/gpu_gtx1660super"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/productTitle"
