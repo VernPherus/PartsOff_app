@@ -61,5 +61,6 @@
     <string name="cash_on_delivery_desc">Please prepare payment upon delivery</string>
     <string name="total">Total:</string>
     <string name="customer_details">Customer Details</string>
+    <string name="log_out">Log out</string>
 
 </resources>
