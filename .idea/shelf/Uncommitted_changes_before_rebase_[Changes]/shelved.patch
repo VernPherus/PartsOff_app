@@ -1,0 +1,18 @@
+Index: app/src/main/java/com/dreamdevs/partsoff_app/storage/SharedPrefManager.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.dreamdevs.partsoff_app.storage\r\n\r\nimport android.annotation.SuppressLint\r\nimport android.content.Context\r\nimport com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest\r\n\r\nclass SharedPrefManager private constructor(private val mCtx: Context) {\r\n\r\n    // Checking for a specific login flag instead of just userEmail existence\r\n    val isLoggedIn: Boolean\r\n        get() {\r\n            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)\r\n            return sharedPreferences.getBoolean(\"isLoggedIn\", false)\r\n        }\r\n\r\n    val user: LoginRequest\r\n        get() {\r\n            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)\r\n            return LoginRequest(\r\n                sharedPreferences.getString(\"userEmail\", \"\") ?: \"\",\r\n                sharedPreferences.getString(\"userPassword\", \"\") ?: \"\"\r\n            )\r\n        }\r\n\r\n    fun saveUser(user: LoginRequest) {\r\n        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)\r\n        val editor = sharedPreferences.edit()\r\n\r\n        editor.putString(\"userEmail\", user.email)\r\n        editor.putString(\"userPassword\", user.password)\r\n        editor.putBoolean(\"isLoggedIn\", true) // Explicitly mark the user as logged in\r\n\r\n        editor.apply()\r\n    }\r\n\r\n    fun clear() {\r\n        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)\r\n        val editor = sharedPreferences.edit()\r\n        editor.clear()\r\n        editor.apply()\r\n    }\r\n\r\n    companion object {\r\n        private const val SHARED_PREF_NAME = \"userPrefs\"\r\n        @SuppressLint(\"StaticFieldLeak\")\r\n        private var mInstance: SharedPrefManager? = null\r\n\r\n        @Synchronized\r\n        fun getInstance(mCtx: Context): SharedPrefManager {\r\n            if (mInstance == null) {\r\n                mInstance = SharedPrefManager(mCtx)\r\n            }\r\n            return mInstance as SharedPrefManager\r\n        }\r\n    }\r\n    fun addItemToCart(productId: String) {\r\n        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)\r\n        val editor = sharedPreferences.edit()\r\n        var cart = sharedPreferences.getStringSet(\"cart\", setOf()) ?: setOf()\r\n        cart = cart.toMutableSet()\r\n        cart.add(productId)\r\n        editor.putStringSet(\"cart\", cart)\r\n        editor.apply()\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/dreamdevs/partsoff_app/storage/SharedPrefManager.kt b/app/src/main/java/com/dreamdevs/partsoff_app/storage/SharedPrefManager.kt
+--- a/app/src/main/java/com/dreamdevs/partsoff_app/storage/SharedPrefManager.kt	(revision a3370d6782921d0fae470353896acd8a5d04b84c)
++++ b/app/src/main/java/com/dreamdevs/partsoff_app/storage/SharedPrefManager.kt	(date 1710051701159)
+@@ -53,6 +53,7 @@
+             return mInstance as SharedPrefManager
+         }
+     }
++
+     fun addItemToCart(productId: String) {
+         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+         val editor = sharedPreferences.edit()
