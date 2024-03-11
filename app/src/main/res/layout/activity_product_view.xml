@@ -87,9 +87,9 @@
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:contentDescription="@string/item_1_description"
+            android:src="@drawable/gpu_gtx1660super"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/productTitle"
@@ -125,7 +125,8 @@
             android:layout_height="19dp"
             android:text="@string/price_placeholder"
             app:layout_constraintStart_toEndOf="@+id/textPriceLabel"
-            app:layout_constraintTop_toTopOf="@+id/textPriceLabel" />
+            app:layout_constraintTop_toTopOf="@+id/textPriceLabel"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/itemQty"
@@ -179,4 +180,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
