@@ -1,20 +1,20 @@
 package com.dreamdevs.partsoff_app
 
+import android.R.attr.label
+import android.R.attr.text
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.widget.PopupMenu
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamdevs.partsoff_app.account.LoginActivity
-import com.dreamdevs.partsoff_app.account.UserProfile
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
@@ -22,6 +22,7 @@ import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,10 +41,10 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        popupMenu()
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+        popupMenu()
 
         productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
             override fun onItemClick(position: Int) {
@@ -159,12 +160,10 @@ class MainActivity : AppCompatActivity() {
         popupMenu.inflate(R.menu.profile_menu)
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
-                R.id.user_email -> {
-                    Toast.makeText(applicationContext, "Share pressed", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.logout_button -> {
-                    Toast.makeText(applicationContext, "logout pressed", Toast.LENGTH_SHORT).show()
+                R.id.logout_action -> {
+                    Toast.makeText(applicationContext, "Successfully Logged out", Toast.LENGTH_SHORT).show()
+                    SharedPrefManager.getInstance(applicationContext).clear()
+                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                     true
                 }
                 else -> true
