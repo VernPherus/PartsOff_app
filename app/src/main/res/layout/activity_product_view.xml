@@ -13,32 +13,40 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
             <ImageButton
-                android:id="@+id/back_button"
-                android:background="@color/primary"
-                android:src="@drawable/baseline_arrow_back_24"
+                android:id="@+id/backButton"
                 android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/back"/>
+                android:background="@color/primary"
+                android:contentDescription="@string/back"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/cartButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="23dp"
-                android:layout_toStartOf="@+id/profileButton"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="56dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cart"
                 android:src="@drawable/cart_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
@@ -47,28 +55,33 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/cartButton"
                 android:layout_alignEnd="@id/cartButton"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="-8dp"
+                android:layout_marginBottom="28dp"
                 android:gravity="center"
                 android:minWidth="20dp"
                 android:minHeight="20dp"
                 android:padding="4dp"
                 android:text="@string/_0"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#F3E5F5" />
+                android:textColor="#F3E5F5"
+                app:layout_constraintBottom_toBottomOf="@+id/cartButton"
+                app:layout_constraintEnd_toEndOf="@+id/cartButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/cartButton" />
 
             <ImageButton
                 android:id="@+id/profileButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/profile"
+                android:layout_width="32dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/primary"
                 android:src="@drawable/profile_icon"
-                tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/cartButton"
+                android:contentDescription="@string/profile" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,9 +100,9 @@
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:contentDescription="@string/item_1_description"
+            android:src="@drawable/gpu_gtx1660super"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/productTitle"
@@ -125,7 +138,8 @@
             android:layout_height="19dp"
             android:text="@string/price_placeholder"
             app:layout_constraintStart_toEndOf="@+id/textPriceLabel"
-            app:layout_constraintTop_toTopOf="@+id/textPriceLabel" />
+            app:layout_constraintTop_toTopOf="@+id/textPriceLabel"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/itemQty"
@@ -173,4 +187,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
