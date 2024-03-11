@@ -1,10 +1,11 @@
-package com.dreamdevs.partsoff_app
+package com.dreamdevs.partsoff_app.account
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.dreamdevs.partsoff_app.MainActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityLoginBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.LoginRequest

@@ -1,8 +1,9 @@
-package com.dreamdevs.partsoff_app
+package com.dreamdevs.partsoff_app.account
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.dreamdevs.partsoff_app.MainActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityUserProfileBinding
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 
