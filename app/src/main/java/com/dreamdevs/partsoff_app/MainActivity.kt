@@ -169,7 +169,6 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-
         binding.profileButton.setOnClickListener {
 
             try {
@@ -184,7 +183,6 @@ class MainActivity : AppCompatActivity() {
             }finally {
                 popupMenu.show()
             }
-
             true
         }
     }
