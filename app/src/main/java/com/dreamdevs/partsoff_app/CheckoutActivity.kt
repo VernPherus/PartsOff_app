@@ -1,5 +1,6 @@
 package com.dreamdevs.partsoff_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -22,6 +23,9 @@ class CheckoutActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.backButton.setOnClickListener {
+            startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
+        }
 
     }
 }

@@ -22,11 +22,6 @@
             android:name=".ProductView"
             android:exported="false" />
         <activity
-            android:name=".ProductDisplay"
-            android:exported="false"
-            android:label="@string/title_activity_product_display"
-            android:theme="@style/Theme.PartsOff_app" />
-        <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity

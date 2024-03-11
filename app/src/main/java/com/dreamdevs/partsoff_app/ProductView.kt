@@ -45,6 +45,16 @@ class ProductView : AppCompatActivity() {
             startActivity(Intent(this@ProductView, MainActivity::class.java))
         }
 
+        binding.checkoutButton.setOnClickListener {
+            val checkoutIntent = Intent(this@ProductView, CheckoutActivity::class.java)
+            checkoutIntent.putExtra("id", id)
+            startActivity(checkoutIntent)
+        }
+
+        binding.addToCart.setOnClickListener {
+            Toast.makeText(this@ProductView, "Added item to cart", Toast.LENGTH_SHORT).show()
+        }
+
         popupMenu()
     }
 
