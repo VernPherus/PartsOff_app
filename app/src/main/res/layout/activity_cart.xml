@@ -110,7 +110,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/cart_item_layout" />
+        tools:listitem="@layout/list_cart" />
 
     <RelativeLayout
         android:layout_width="match_parent"
