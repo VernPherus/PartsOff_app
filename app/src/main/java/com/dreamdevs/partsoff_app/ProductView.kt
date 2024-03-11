@@ -45,6 +45,10 @@ class ProductView : AppCompatActivity() {
             startActivity(Intent(this@ProductView, MainActivity::class.java))
         }
 
+        binding.cartButton.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
         binding.checkoutButton.setOnClickListener {
             val checkoutIntent = Intent(this@ProductView, CheckoutActivity::class.java)
             checkoutIntent.putExtra("id", id)
@@ -87,7 +91,7 @@ class ProductView : AppCompatActivity() {
             }finally {
                 popupMenu.show()
             }
-            true
+
         }
     }
 }

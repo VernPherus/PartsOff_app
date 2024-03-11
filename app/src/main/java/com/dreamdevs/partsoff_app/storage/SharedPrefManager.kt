@@ -53,13 +53,4 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
             return mInstance as SharedPrefManager
         }
     }
-    fun addItemToCart(productId: String) {
-        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        var cart = sharedPreferences.getStringSet("cart", setOf()) ?: setOf()
-        cart = cart.toMutableSet()
-        cart.add(productId)
-        editor.putStringSet("cart", cart)
-        editor.apply()
-    }
 }

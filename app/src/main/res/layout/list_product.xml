@@ -26,7 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/product_title"
+        android:text="Short Title"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -59,7 +59,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/product_image"
         app:layout_constraintTop_toBottomOf="@+id/product_title" />
-
+    <!--    <TextView-->
+    <!--        android:id="@+id/product_id"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="72dp"-->
+    <!--        android:text="@string/_0"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+    <!--        android:textColor="@android:color/black"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/qty_label" />-->
     <TextView
         android:id="@+id/product_qty"
         android:layout_width="wrap_content"
@@ -72,16 +81,7 @@
         app:layout_constraintEnd_toEndOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
-    <TextView
-        android:id="@+id/product_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:text="@string/_0"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qty_label" />
+
 
     <TextView
         android:id="@+id/qty_label"
@@ -109,30 +109,5 @@
         app:layout_constraintTop_toTopOf="@+id/product_price"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/buy_now_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg"
-        android:text="@string/buy_now"
-        android:textColor="@android:color/white"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/product_desc"
-        app:layout_constraintVertical_bias="0.818" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/underline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buy_now_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
