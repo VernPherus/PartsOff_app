@@ -40,6 +40,11 @@ class ProductView : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             startActivity(Intent(this@ProductView, MainActivity::class.java))
         }
+
+        binding.addToCart.setOnClickListener {
+
+
+        }
     }
 }
 

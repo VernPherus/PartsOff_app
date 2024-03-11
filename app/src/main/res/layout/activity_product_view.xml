@@ -152,26 +152,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nested_constraint"
         app:layout_constraintStart_toStartOf="@+id/nested_constraint"
         app:layout_constraintTop_toBottomOf="@+id/nested_constraint">
 
-        <Button
-            android:id="@+id/checkout_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="205dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="4dp"
-            android:text="@string/checkout"
-            app:layout_constraintVertical_bias="0.0" />
-
+        <!-- Add to Cart Button -->
         <Button
             android:id="@+id/add_to_cart"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:text="@string/add_to_cart"
+            android:layout_gravity="end"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="648dp" />
 
