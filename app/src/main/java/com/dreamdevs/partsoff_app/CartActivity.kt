@@ -6,9 +6,8 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
-import retrofit2.Call
+
 
 class CartActivity : AppCompatActivity() {
 
@@ -34,7 +33,6 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun loadProducts() {
-        RetrofitClient.authService.getProducts().enqueue()
     }
 
 
@@ -46,7 +44,5 @@ class CartActivity : AppCompatActivity() {
     }
 }
 
-private fun <T> Call<T>.enqueue() {
 
-}
 
