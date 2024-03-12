@@ -1,10 +1,6 @@
 package com.dreamdevs.partsoff_app
 
-import android.R.attr.label
-import android.R.attr.text
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -184,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             }finally {
                 popupMenu.show()
             }
-            true
         }
     }
 
