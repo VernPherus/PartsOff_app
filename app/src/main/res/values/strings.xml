@@ -66,5 +66,7 @@
     <string name="placeholder_email">example@web.com</string>
     <string name="refresh">Refresh</string>
     <string name="for_you">For You!</string>
+    <string name="nav_name">Example D. Example</string>
+    <string name="nav_email">example@example.com</string>
 
 </resources>
