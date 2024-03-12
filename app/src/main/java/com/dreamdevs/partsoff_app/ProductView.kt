@@ -37,6 +37,7 @@ class ProductView : AppCompatActivity() {
         binding.itemPrice.text = "₱ $price"
         binding.itemQty.text = qty.toString()
 
+
         imageUrl?.let {
             Glide.with(this@ProductView)
                 .load("http://64.23.185.162/uploads/product/large/$it")
