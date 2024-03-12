@@ -31,8 +31,6 @@ class ProductView : AppCompatActivity() {
         val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
-        val decrementButton = binding.decrementButton
-        val incrementButton = binding.incrementButton
         val quantityTextView = binding.quantityTextView
 
         var currentQuantity = 1
