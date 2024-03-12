@@ -14,12 +14,11 @@ import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 class ProductAdapter(private var productList: List<ProductsData>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
+    private lateinit var clickListener: OnItemListener
+
     interface OnItemListener {
         fun onItemClick(position: Int)
     }
-
-    var productListFiltered = productList
-    private lateinit var clickListener: OnItemListener
 
     fun setOnItemClickListener(listener: OnItemListener) {
         clickListener = listener
@@ -31,6 +30,8 @@ class ProductAdapter(private var productList: List<ProductsData>) :
         return ProductViewHolder(itemView, clickListener)
     }
 
+
+    var productListFiltered = productList
     override fun getItemCount(): Int {
         return productListFiltered.size
     }

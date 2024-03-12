@@ -23,7 +23,7 @@ class CartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCartBinding.inflate(layoutInflater) // Correct inflation
+        binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setContentView(binding.root)
 
@@ -43,6 +43,18 @@ class CartActivity : AppCompatActivity() {
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
+
+        // Create an instance of ProductAdapter and set the click listener
+        val productAdapter = ProductAdapter(cartItems)
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+            override fun onItemClick(position: Int) {
+                // Handle item click action
+                // You can implement the desired behavior when an item is clicked
+            }
+        })
+
+        // Set the adapter to the RecyclerView
+        cartItemsRecyclerView.adapter = productAdapter
     }
 
     private fun initializeUI() {
@@ -54,7 +66,9 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun loadProducts() {
-        // Implement loading products if needed
+        val sharedPreferences = SharedPrefManager.getInstance(this)
+        cartItems = sharedPreferences.getCartItems()
+        cartItemsRecyclerView.adapter = ProductAdapter(cartItems)
     }
 
     private fun setupCheckoutButton() {
