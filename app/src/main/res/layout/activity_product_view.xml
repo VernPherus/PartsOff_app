@@ -107,7 +107,7 @@
         <TextView
             android:id="@+id/productTitle"
             android:layout_width="377dp"
-            android:layout_height="41dp"
+            android:layout_height="50dp"
             android:text="@string/product_title"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.dreamdevs.partsoff_app.account.LoginActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityProductViewBinding
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductImage
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 
 class ProductView : AppCompatActivity() {
@@ -33,7 +35,7 @@ class ProductView : AppCompatActivity() {
         binding.productTitle.text = title
         binding.productDesc.text = desc
         binding.itemPrice.text = "₱ $price"
-        binding.itemQty.text = qty
+        binding.itemQty.text = qty.toString()
 
         imageUrl?.let {
             Glide.with(this@ProductView)
@@ -47,6 +49,10 @@ class ProductView : AppCompatActivity() {
 
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        binding.addToCart.setOnClickListener {
+            addToCart()
         }
 
         popupMenu()
@@ -83,6 +89,31 @@ class ProductView : AppCompatActivity() {
             }
 
         }
+    }
+    private fun addToCart() {
+        val sharedPreferences = SharedPrefManager.getInstance(this)
+        val cartItems = sharedPreferences.getCartItems().toMutableList()
+
+        val bundle: Bundle? = intent.extras
+        val id = bundle!!.getInt("id")
+        val title = bundle.getString("title")
+        val desc = bundle.getString("description")
+        val price = bundle.getString("price")
+        val qty = bundle.getString("qty")
+        val imageUrl = bundle.getString("image")
+
+        // Create a new product object
+        val product = ProductsData(id, title!!, desc!!, price!!.toInt(), qty!!.toInt(), listOf(
+            ProductImage(imageUrl!!)
+        ))
+
+        // Add the product to the cart
+        cartItems.add(product)
+
+        // Save the updated cart items to SharedPreferences
+        sharedPreferences.saveCartItems(cartItems)
+
+        Toast.makeText(this@ProductView, "Added to Cart", Toast.LENGTH_SHORT).show()
     }
 }
 
