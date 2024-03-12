@@ -74,11 +74,7 @@ class CartActivity : AppCompatActivity() {
         for (product in cartItems) {
             totalQty += product.qty
         }
-        var shipping = if (cartItems.isEmpty()) {
-            0.00
-        } else {
-            35.00
-        }
+        var shipping = 35.00
         var totalPrice = 0.00
 
         totalPrice = subtotalPrice + shipping
