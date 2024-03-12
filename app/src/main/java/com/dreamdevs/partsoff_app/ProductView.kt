@@ -36,20 +36,30 @@ class ProductView : AppCompatActivity() {
         val quantityTextView = binding.quantityTextView
 
         var currentQuantity = 1
+        val maxQty = qty.toString().toInt()
 
-        decrementButton.setOnClickListener {
+        binding.decrementButton.setOnClickListener {
             if (currentQuantity > 1) {
                 currentQuantity--
                 quantityTextView.text = currentQuantity.toString()
+                if(!binding.incrementButton.isEnabled){
+                    binding.incrementButton.isEnabled = true
+                }
+            }else{
+                binding.decrementButton.isEnabled = false
             }
         }
 
-        incrementButton.setOnClickListener {
-            if (currentQuantity < 5) { // Change the limit to 5 or any other desired limit
+        binding.incrementButton.setOnClickListener {
+            if (currentQuantity < 5 || currentQuantity == maxQty) { // Change the limit to 5 or any other desired limit
                 currentQuantity++
                 quantityTextView.text = currentQuantity.toString()
+                if (!binding.decrementButton.isEnabled){
+                    binding.decrementButton.isEnabled = true
+                }
             } else {
                 Toast.makeText(this@ProductView, "Maximum quantity reached", Toast.LENGTH_SHORT).show()
+                binding.incrementButton.isEnabled = false
             }
         }
 

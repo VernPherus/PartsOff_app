@@ -171,10 +171,12 @@
             android:id="@+id/decrementButton"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:text="-"
+            android:text="@string/decrement"
+            android:clickable="false"
             android:textSize="20sp"
             android:background="@color/primary"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/quantityTextView"
@@ -190,11 +192,13 @@
             android:id="@+id/incrementButton"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:text="+"
+            android:text="@string/increment"
             android:textSize="20sp"
+            android:clickable="true"
 
             android:background="@color/primary"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/addToCart"
