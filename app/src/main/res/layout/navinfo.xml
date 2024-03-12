@@ -23,11 +23,7 @@
             android:paddingHorizontal="10sp"
             android:text="@string/nav_name"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toendof="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -42,10 +38,6 @@
             android:padding="10sp"
             android:text="@string/nav_email"
             android:textSize="15sp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartof="parent"
-            app:layout_constraintTop_toBottomof="@id/nav_name"
-            app:layout_constraintTop_toTopOf="@+id/nav_name" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
