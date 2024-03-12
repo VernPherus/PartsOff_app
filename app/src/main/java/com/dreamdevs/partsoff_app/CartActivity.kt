@@ -68,6 +68,33 @@ class CartActivity : AppCompatActivity() {
     private fun loadProducts() {
         val sharedPreferences = SharedPrefManager.getInstance(this)
         cartItems = sharedPreferences.getCartItems()
+
+        // Calculate the subtotal price
+        var subtotalPrice = 0.00
+        for (product in cartItems) {
+            subtotalPrice += product.price
+        }
+
+        var totalQty = 0
+        for (product in cartItems) {
+            totalQty += product.qty
+        }
+        var shipping = if (cartItems.isEmpty()) {
+            0.0
+        } else {
+            35.00
+        }
+        var totalPrice = 0.00
+
+        totalPrice = subtotalPrice + shipping
+
+        // Display the total price in the TextView
+        binding.totalQtyTextView.text = "Total QTY: $totalQty"
+        binding.ShippingTextView.text = "Shipping Fee: ₱$shipping"
+        binding.subtotalPriceTextView.text = "Subtotal Price: ₱$subtotalPrice"
+        binding.totalPriceTextView.text = "Total Price: ₱$totalPrice"
+
+        // Set the adapter to the RecyclerView
         cartItemsRecyclerView.adapter = ProductAdapter(cartItems)
     }
 

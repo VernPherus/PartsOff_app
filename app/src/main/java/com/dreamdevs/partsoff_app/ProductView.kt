@@ -31,12 +31,33 @@ class ProductView : AppCompatActivity() {
         val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
+        val decrementButton = binding.decrementButton
+        val incrementButton = binding.incrementButton
+        val quantityTextView = binding.quantityTextView
+
+        var currentQuantity = 1
+
+        decrementButton.setOnClickListener {
+            if (currentQuantity > 1) {
+                currentQuantity--
+                quantityTextView.text = currentQuantity.toString()
+            }
+        }
+
+        incrementButton.setOnClickListener {
+            if (currentQuantity < 5) { // Change the limit to 5 or any other desired limit
+                currentQuantity++
+                quantityTextView.text = currentQuantity.toString()
+            } else {
+                Toast.makeText(this@ProductView, "Maximum quantity reached", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         binding.productTitle.text = title
         binding.productDesc.text = desc
         binding.itemPrice.text = "₱ $price"
         binding.itemQty.text = qty.toString()
-
 
         imageUrl?.let {
             Glide.with(this@ProductView)
@@ -54,12 +75,6 @@ class ProductView : AppCompatActivity() {
 
         binding.addToCart.setOnClickListener {
             addToCart()
-        }
-
-        binding.checkoutButton.setOnClickListener {
-            val checkoutIntent = Intent(this@ProductView, CheckoutActivity::class.java)
-            checkoutIntent.putExtra("id", id)
-            startActivity(checkoutIntent)
         }
 
         popupMenu()
@@ -106,13 +121,19 @@ class ProductView : AppCompatActivity() {
         val title = bundle.getString("title")
         val desc = bundle.getString("description")
         val price = bundle.getString("price")
-        val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
-        // Create a new product object
-        val product = ProductsData(id, title!!, desc!!, price!!.toInt(), qty!!.toInt(), listOf(
-            ProductImage(imageUrl!!)
-        ))
+        val quantityTextView = binding.quantityTextView
+        val selectedQuantity = quantityTextView.text.toString().toInt()
+
+        // Calculate the total price based on selected quantity
+        val totalPrice = price!!.toInt() * selectedQuantity
+
+        // Create a new product object with the calculated total price
+        val product = ProductsData(
+            id, title!!,"", totalPrice, selectedQuantity,
+            listOf(ProductImage(imageUrl!!))
+        )
 
         // Add the product to the cart
         cartItems.add(product)
