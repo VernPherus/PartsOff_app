@@ -123,9 +123,12 @@ class ProductView : AppCompatActivity() {
         val quantityTextView = binding.quantityTextView
         val selectedQuantity = quantityTextView.text.toString().toInt()
 
-        // Create a new product object
+        // Calculate the total price based on selected quantity
+        val totalPrice = price!!.toInt() * selectedQuantity
+
+        // Create a new product object with the calculated total price
         val product = ProductsData(
-            id, title!!, desc!!, price!!.toInt(), selectedQuantity,
+            id, title!!, "", totalPrice, selectedQuantity,
             listOf(ProductImage(imageUrl!!))
         )
 
