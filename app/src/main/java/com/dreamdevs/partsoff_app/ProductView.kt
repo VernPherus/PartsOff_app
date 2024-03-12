@@ -131,7 +131,7 @@
 
             // Create a new product object with the calculated total price
             val product = ProductsData(
-                id, title!!, "", totalPrice, selectedQuantity,
+                id, title!!,"", totalPrice, selectedQuantity,
                 listOf(ProductImage(imageUrl!!))
             )
 

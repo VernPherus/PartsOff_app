@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-         <!--toolbar -->
+
+    <!--toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
@@ -18,11 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white">
 
+        <!-- ConstraintLayout for toolbar content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
+            <!-- Back button -->
             <ImageButton
                 android:id="@+id/backButton"
                 android:layout_width="44dp"
@@ -34,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
+            <!-- Cart button -->
             <ImageButton
                 android:id="@+id/cartButton"
                 android:layout_width="wrap_content"
@@ -49,7 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-
+            <!-- Profile button -->
             <ImageButton
                 android:id="@+id/profileButton"
                 android:layout_width="32dp"
@@ -66,42 +69,86 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
+    <!-- Your Cart TextView -->
     <TextView
         android:id="@+id/yourCartTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/your_cart"
         android:padding="16dp"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+    <!-- RecyclerView for cart items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_items_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="404dp"
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_cart" />
 
+    <!-- Total Price TextView -->
+
+    <TextView
+        android:id="@+id/totalQtyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Qty: 0"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/ShippingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shipping Fee: P35"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/subtotalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subtotal Price: 0.00"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="total Price: 0.00"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end" />
+
+    <!-- RelativeLayout for Checkout Button -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
-
+        <!-- Checkout Button -->
         <Button
-        android:id="@+id/checkout_button"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+            android:id="@+id/checkout_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg"
             android:textColor="@color/white"
             android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/checkout" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/checkout" />
 
     </RelativeLayout>
 </LinearLayout>
