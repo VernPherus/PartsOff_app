@@ -49,24 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <TextView
-                android:id="@+id/cartQuantityTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/cartButton"
-                android:layout_alignEnd="@id/cartButton"
-                android:layout_marginBottom="28dp"
-                android:gravity="center"
-                android:minWidth="20dp"
-                android:minHeight="20dp"
-                android:padding="4dp"
-                android:text="@string/_0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#F3E5F5"
-                app:layout_constraintBottom_toBottomOf="@+id/cartButton"
-                app:layout_constraintEnd_toEndOf="@+id/cartButton"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/cartButton" />
+
 
             <ImageButton
                 android:id="@+id/profileButton"
