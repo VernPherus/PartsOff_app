@@ -33,7 +33,7 @@ class ProductView : AppCompatActivity() {
         binding.productTitle.text = title
         binding.productDesc.text = desc
         binding.itemPrice.text = "₱ $price"
-        binding.itemQty.text = qty
+        binding.itemQty.text = qty.toString()
 
         imageUrl?.let {
             Glide.with(this@ProductView)
