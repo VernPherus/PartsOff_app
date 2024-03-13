@@ -24,11 +24,11 @@
 
             <ImageButton
                 android:id="@+id/backButton"
-                android:background="@color/primary"
-                android:src="@drawable/baseline_arrow_back_24"
                 android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/back"/>
+                android:background="@color/primary"
+                android:contentDescription="@string/back"
+                android:src="@drawable/baseline_arrow_back_24" />
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -38,71 +38,75 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:orientation="vertical"
         android:padding="15dp"
-        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:id="@+id/textViewOrderSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_summary"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="88dp" />
+
+        <TextView
+            android:id="@+id/totalQtyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_qty_0"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/ShippingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_fee_p35"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/subtotalPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subtotal_price_0_00"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewOrderSummary"
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/order_summary"
-                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:layout_weight="1"
+                android:text="@string/total"
+                android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="60dp"
-                tools:layout_editor_absoluteY="88dp" />
+                android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/totalPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/price" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/qty" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/total" />
-
+                android:layout_weight="1"
+                android:text="@string/price_placeholder"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="@string/total" />
-
-            <TextView
-                android:id="@+id/total_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price_placeholder" />
-
-            <TextView
-                android:id="@+id/total_qty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/qty_placeholder" />
-
-        </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Confirm Order Button -->
 
     <LinearLayout
         android:id="@+id/user_form"
@@ -112,15 +116,15 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498"
-        tools:layout_editor_absoluteX="-10dp">
+        app:layout_constraintVertical_bias="0.553"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/customer_details"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextFirstName"
@@ -168,8 +172,6 @@
 
     </LinearLayout>
 
-    <!-- Confirm Order Button -->
-
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -196,8 +198,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:padding="15dp"
         android:orientation="vertical"
+        android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirmOrder"
         app:layout_constraintEnd_toEndOf="@+id/buttonConfirmOrder"
         app:layout_constraintStart_toStartOf="@+id/buttonConfirmOrder">
@@ -206,7 +208,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cash_on_delivery"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"

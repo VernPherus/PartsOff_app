@@ -20,6 +20,10 @@ class CartActivity : AppCompatActivity() {
     private lateinit var checkoutButton: Button
     private lateinit var binding : ActivityCartBinding
     private var cartItems: List<ProductsData> = listOf()
+    private var totalPrice : Double = 0.0
+    private var subTotalPrice : Double = 0.0
+    private var totalQty : Double = 0.0
+    private var shipping : Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,28 +74,24 @@ class CartActivity : AppCompatActivity() {
         cartItems = sharedPreferences.getCartItems()
 
         // Calculate the subtotal price
-        var subtotalPrice = 0.00
         for (product in cartItems) {
-            subtotalPrice += product.price
+            subTotalPrice += product.price
         }
 
-        var totalQty = 0
         for (product in cartItems) {
             totalQty += product.qty
         }
-        var shipping = if (cartItems.isEmpty()) {
+        shipping = if (cartItems.isEmpty()) {
             0.0
         } else {
             35.00
         }
-        var totalPrice = 0.00
 
-        totalPrice = subtotalPrice + shipping
-
+        totalPrice = subTotalPrice + shipping
         // Display the total price in the TextView
         binding.totalQtyTextView.text = "Total QTY: $totalQty"
         binding.ShippingTextView.text = "Shipping Fee: ₱$shipping"
-        binding.subtotalPriceTextView.text = "Subtotal Price: ₱$subtotalPrice"
+        binding.subtotalPriceTextView.text = "Subtotal Price: ₱$subTotalPrice"
         binding.totalPriceTextView.text = "Total Price: ₱$totalPrice"
 
         // Set the adapter to the RecyclerView
@@ -101,6 +101,10 @@ class CartActivity : AppCompatActivity() {
     private fun setupCheckoutButton() {
         checkoutButton.setOnClickListener {
             val intent = Intent(this, CheckoutActivity::class.java)
+            intent.putExtra("qty", totalQty.toString())
+            intent.putExtra("shipping", shipping.toString())
+            intent.putExtra("subTotalPrice", subTotalPrice.toString())
+            intent.putExtra("totalPrice", totalPrice.toString())
             startActivity(intent)
         }
     }
