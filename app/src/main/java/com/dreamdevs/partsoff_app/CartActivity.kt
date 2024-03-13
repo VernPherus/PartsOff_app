@@ -144,7 +144,7 @@ class CartActivity : AppCompatActivity() {
             .setMessage("Are you sure you want to delete this item from your cart?")
             .setPositiveButton("Yes") { _, _ ->
                 // User confirmed, proceed with deletion
-                cartItems = cartItems.filterIndexed { index, _ -> index != position }
+                cartItems = cartItems.toMutableList().apply { removeAt(position) }
 
                 // Update shared preferences
                 val sharedPreferences = SharedPrefManager.getInstance(this)
@@ -155,6 +155,8 @@ class CartActivity : AppCompatActivity() {
 
                 // Update the UI
                 loadProducts()
+
+                recreate()
             }
             .setNegativeButton("No", null) // User canceled, do nothing
             .show()
