@@ -91,20 +91,25 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray"/>
 
-            <TextView
-                android:id="@+id/signupButton"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Sign Up"
-                android:textSize="18sp"
-                android:textColor="@color/primary"
-                android:gravity="center"
-                android:padding="16dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="@string/don_t_have_an_account"/>
+
+                <TextView
+                    android:id="@+id/signUpLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="@string/sign_up_here"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>

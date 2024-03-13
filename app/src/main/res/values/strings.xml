@@ -58,7 +58,7 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="back">Back</string>
     <string name="cash_on_delivery">Cash on Delivery</string>
-    <string name="order_summary">Order Summary</string>
+    <string name="order_summary">Order Summary: </string>
     <string name="cash_on_delivery_desc">Please prepare payment upon delivery</string>
     <string name="total">Total:</string>
     <string name="customer_details">Customer Details</string>
@@ -68,5 +68,12 @@
     <string name="for_you">For You!</string>
     <string name="nav_name">Example D. Example</string>
     <string name="nav_email">example@example.com</string>
+    <string name="don_t_have_an_account">Don\'t have an account? </string>
+    <string name="sign_up_here"><a href="#">Sign up here</a></string>
+    <string name="decrement">-</string>
+    <string name="increment">+</string>
+    <string name="shipping_fee_p35">Shipping Fee: ₱35</string>
+    <string name="total_qty_0">Total Qty: 0</string>
+    <string name="subtotal_price_0_00">Subtotal Price: ₱0.0</string>
 
 </resources>

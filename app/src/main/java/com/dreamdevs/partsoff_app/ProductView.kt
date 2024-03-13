@@ -31,6 +31,36 @@ class ProductView : AppCompatActivity() {
         val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
+        val quantityTextView = binding.quantityTextView
+
+        var currentQuantity = 1
+        val maxQty = qty.toString().toInt()
+
+        binding.decrementButton.setOnClickListener {
+            if (currentQuantity > 1) {
+                currentQuantity--
+                quantityTextView.text = currentQuantity.toString()
+                if(!binding.incrementButton.isEnabled){
+                    binding.incrementButton.isEnabled = true
+                }
+            }else{
+                binding.decrementButton.isEnabled = false
+            }
+        }
+
+        binding.incrementButton.setOnClickListener {
+            if (currentQuantity < 5 || currentQuantity == maxQty) { // Change the limit to 5 or any other desired limit
+                currentQuantity++
+                quantityTextView.text = currentQuantity.toString()
+                if (!binding.decrementButton.isEnabled){
+                    binding.decrementButton.isEnabled = true
+                }
+            } else {
+                Toast.makeText(this@ProductView, "Maximum quantity reached", Toast.LENGTH_SHORT).show()
+                binding.incrementButton.isEnabled = false
+            }
+        }
+
 
         binding.productTitle.text = title
         binding.productDesc.text = desc
@@ -99,13 +129,19 @@ class ProductView : AppCompatActivity() {
         val title = bundle.getString("title")
         val desc = bundle.getString("description")
         val price = bundle.getString("price")
-        val qty = bundle.getString("qty")
         val imageUrl = bundle.getString("image")
 
-        // Create a new product object
-        val product = ProductsData(id, title!!, desc!!, price!!.toInt(), qty!!.toInt(), listOf(
-            ProductImage(imageUrl!!)
-        ))
+        val quantityTextView = binding.quantityTextView
+        val selectedQuantity = quantityTextView.text.toString().toInt()
+
+        // Calculate the total price based on selected quantity
+        val totalPrice = price!!.toInt() * selectedQuantity
+
+        // Create a new product object with the calculated total price
+        val product = ProductsData(
+            id, title!!,"", totalPrice, selectedQuantity,
+            listOf(ProductImage(imageUrl!!))
+        )
 
         // Add the product to the cart
         cartItems.add(product)

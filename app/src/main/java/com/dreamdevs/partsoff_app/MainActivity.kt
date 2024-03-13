@@ -180,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             }finally {
                 popupMenu.show()
             }
-            true
         }
     }
 //    private fun openDrawerWithUserDetails() {

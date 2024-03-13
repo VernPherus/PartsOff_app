@@ -18,14 +18,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white">
 
+        <!-- ConstraintLayout for toolbar content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
+            <!-- Back button -->
             <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="44dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:background="@color/primary"
                 android:contentDescription="@string/back"
@@ -34,52 +36,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Cart button -->
 
+            <!-- Profile button -->
             <ImageButton
                 android:id="@+id/cartButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="56dp"
+                android:layout_marginEnd="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cart"
                 android:src="@drawable/cart_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="TouchTargetSizeCheck" />
-
-            <TextView
-                android:id="@+id/cartQuantityTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/cartButton"
-                android:layout_alignEnd="@id/cartButton"
-                android:layout_marginBottom="28dp"
-                android:gravity="center"
-                android:minWidth="20dp"
-                android:minHeight="20dp"
-                android:padding="4dp"
-                android:text="@string/_0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#F3E5F5"
-                app:layout_constraintBottom_toBottomOf="@+id/cartButton"
-                app:layout_constraintEnd_toEndOf="@+id/cartButton"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/cartButton" />
 
             <ImageButton
                 android:id="@+id/profileButton"
-                android:layout_width="32dp"
-                android:layout_height="56dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="15dp"
                 android:background="@color/primary"
+                android:contentDescription="@string/profile"
                 android:src="@drawable/profile_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/cartButton"
-                android:contentDescription="@string/profile" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/cartButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -109,7 +95,7 @@
             android:layout_width="377dp"
             android:layout_height="50dp"
             android:text="@string/product_title"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,17 +135,26 @@
             app:layout_constraintStart_toEndOf="@+id/textQTYLabel"
             app:layout_constraintTop_toTopOf="@+id/textQTYLabel" />
 
-        <TextView
-            android:id="@+id/productDesc"
+        <ScrollView
+            android:id="@+id/scroller_view"
+            android:layout_width="391dp"
+            android:layout_height="259dp"
+            android:fillViewport="true"
             android:scrollbars="vertical"
-            android:layout_width="370dp"
-            android:layout_height="262dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/sample_description"
-            app:layout_constraintEnd_toEndOf="@+id/productTitle"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/productTitle"
-            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productTitle"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp">
+
+            <TextView
+                android:id="@+id/productDesc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="@string/sample_description" />
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,13 +167,46 @@
         app:layout_constraintStart_toStartOf="@+id/nested_constraint"
         app:layout_constraintTop_toBottomOf="@+id/nested_constraint">
 
-        <!-- Add to Cart Button -->
         <Button
-            android:id="@+id/add_to_cart"
+            android:id="@+id/decrementButton"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/decrement"
+            android:clickable="false"
+            android:textSize="20sp"
+            android:background="@color/primary"
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/quantityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="8dp"/>
+
+        <Button
+            android:id="@+id/incrementButton"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/increment"
+            android:textSize="20sp"
+            android:clickable="true"
+
+            android:background="@color/primary"
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
+
+        <Button
+            android:id="@+id/addToCart"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:text="@string/add_to_cart"
+            android:textColor="#000000"
             android:layout_gravity="end"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="648dp" />
