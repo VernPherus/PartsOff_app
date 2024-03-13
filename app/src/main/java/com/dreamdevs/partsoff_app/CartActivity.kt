@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -113,16 +114,29 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun deleteCartItem(position: Int) {
-        // Remove the item from the cart
+        // Get the item to be deleted
         val deletedItem = cartItems[position]
-        cartItems = cartItems.filterIndexed { index, _ -> index != position }
 
-        // Update the UI
-        loadProducts()
+        // Build and show a confirmation dialog
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Deletion")
+            .setMessage("Are you sure you want to delete this item from your cart?")
+            .setPositiveButton("Yes") { _, _ ->
+                // User confirmed, proceed with deletion
+                cartItems = cartItems.filterIndexed { index, _ -> index != position }
 
-        // Update shared preferences
-        val sharedPreferences = SharedPrefManager.getInstance(this)
-        sharedPreferences.removeCartItem(deletedItem)
+                // Update shared preferences
+                val sharedPreferences = SharedPrefManager.getInstance(this)
+                sharedPreferences.removeCartItem(deletedItem)
+
+                // Reload the products from SharedPreferences
+                cartItems = sharedPreferences.getCartItems()
+
+                // Update the UI
+                loadProducts()
+            }
+            .setNegativeButton("No", null) // User canceled, do nothing
+            .show()
     }
 
 
