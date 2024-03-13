@@ -52,6 +52,12 @@ class CartActivity : AppCompatActivity() {
                 // You can implement the desired behavior when an item is clicked
             }
         })
+        productAdapter.setOnItemLongPressListener(object : ProductAdapter.OnItemLongPressListener {
+            override fun onItemLongPressed(position: Int) {
+                // Call the method to delete item from cart
+                deleteCartItem(position)
+            }
+        })
 
         // Set the adapter to the RecyclerView
         cartItemsRecyclerView.adapter = productAdapter
@@ -105,6 +111,20 @@ class CartActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun deleteCartItem(position: Int) {
+        // Remove the item from the cart
+        val deletedItem = cartItems[position]
+        cartItems = cartItems.filterIndexed { index, _ -> index != position }
+
+        // Update the UI
+        loadProducts()
+
+        // Update shared preferences
+        val sharedPreferences = SharedPrefManager.getInstance(this)
+        sharedPreferences.removeCartItem(deletedItem)
+    }
+
 
     @SuppressLint("DiscouragedPrivateApi")
     private fun popupMenu() {
