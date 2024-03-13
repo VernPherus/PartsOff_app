@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Parts Off</string>
     <string name="placeholdertxt">Lorem ipsum dolor</string>
     <string name="sign_up">Sign Up</string>
     <string name="email_hint">Email</string>
@@ -12,6 +12,7 @@
     <string name="todo">TODO</string>
     <string name="login">LOGIN</string>
     <string name="email">Email</string>
+    <string name="email2">Email: </string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_cart">Cart</string>
@@ -41,6 +42,7 @@
     <string name="product_title">Product Title</string>
     <string name="price_placeholder">₱0.00</string>
     <string name="qty">QTY:</string>
+    <string name="qty_placeholder">2</string>
     <string name="price">Price:</string>
     <string name="sample_description">Sample description</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -55,5 +57,21 @@
     <string name="paypal">PayPal</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="back">Back</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="order_summary">Order Summary: </string>
+    <string name="cash_on_delivery_desc">Please prepare payment upon delivery</string>
+    <string name="total">Total:</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="log_out">Log out</string>
+    <string name="placeholder_email">example@web.com</string>
+    <string name="refresh">Refresh</string>
+    <string name="for_you">For You!</string>
+    <string name="don_t_have_an_account">Don\'t have an account? </string>
+    <string name="sign_up_here"><a href="#">Sign up here</a></string>
+    <string name="decrement">-</string>
+    <string name="increment">+</string>
+    <string name="shipping_fee_p35">Shipping Fee: ₱35</string>
+    <string name="total_qty_0">Total Qty: 0</string>
+    <string name="subtotal_price_0_00">Subtotal Price: ₱0.0</string>
 
 </resources>

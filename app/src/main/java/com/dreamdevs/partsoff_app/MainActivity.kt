@@ -1,27 +1,30 @@
 package com.dreamdevs.partsoff_app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dreamdevs.partsoff_app.account.LoginActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityMainBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.Products
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
-    private var productList: ArrayList<Products> = ArrayList()
+    private var productList: ArrayList<ProductsData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +40,31 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         fetchProducts()
         setupSearch()
+        popupMenu()
+
+        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
+            override fun onItemClick(position: Int) {
+                val clickedProduct = productAdapter.productListFiltered[position]
+
+                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
+                    putExtra("id", clickedProduct.id)
+                    putExtra("title", clickedProduct.title)
+                    putExtra("description", clickedProduct.description.toString())
+                    putExtra("price", clickedProduct.price.toString())
+                    putExtra("qty", clickedProduct.qty.toString())
+                    putExtra("image", clickedProduct.productImages?.firstOrNull()?.image)
+                }
+                startActivity(intent)
+
+            }
+        })
 
         binding.cartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
+
         setupRefreshButton()
+
     }
 
     private fun scrollToTop() {
@@ -62,24 +85,6 @@ class MainActivity : AppCompatActivity() {
         binding.productsRecycler.setHasFixedSize(true)
         productAdapter = ProductAdapter(productList)
         binding.productsRecycler.adapter = productAdapter
-
-        productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
-            override fun onItemClick(position: Int) {
-                val clickedProduct = productList[position]
-
-                val intent = Intent(this@MainActivity, ProductView::class.java).apply {
-                    putExtra("PRODUCT_TITLE", clickedProduct.title)
-                    putExtra("PRODUCT_PRICE", clickedProduct.price)
-                    putExtra("PRODUCT_QTY", clickedProduct.qty)
-                }
-                startActivity(intent)
-            }
-        })
-        binding.productsRecycler.adapter = productAdapter
-    }
-
-    private fun putExtra() {
-
     }
 
 
@@ -91,18 +96,6 @@ class MainActivity : AppCompatActivity() {
 
                     updateRecyclerView(productListData)
 
-                    productAdapter.setOnItemClickListener(object : ProductAdapter.OnItemListener {
-                        override fun onItemClick(position: Int) {
-                            val intent = Intent(this@MainActivity, ProductView::class.java)
-                            intent.putExtra("title", productList[position].title)
-                            intent.putExtra("description", productList[position].description.toString())
-                            intent.putExtra("price", productList[position].price.toString())
-                            intent.putExtra("qty", productList[position].qty.toString())
-
-
-                            startActivity(intent)
-                        }
-                    })
 
                 } else {
                     Log.e("FetchProducts", "Unsuccessful response: ${response.errorBody()?.string()}")
@@ -118,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(productDataList: List<ProductsData>) {
         productList.clear()
 
@@ -125,11 +119,14 @@ class MainActivity : AppCompatActivity() {
             val quantity = productData.qty.toInt()
             if (quantity > 0) {
                 productList.add(
-                    Products(
+                    ProductsData(
+                        productData.id,
                         productData.title,
                         productData.description,
                         productData.price.toInt(),
-                        quantity
+                        quantity,
+                        productData.productImages,
+
                     )
                 )
             }
@@ -152,6 +149,38 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
+    }
+
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun popupMenu(){
+        val popupMenu = PopupMenu(applicationContext, binding.profileButton)
+        popupMenu.inflate(R.menu.profile_menu)
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.logout_action -> {
+                    Toast.makeText(applicationContext, "Successfully Logged out", Toast.LENGTH_SHORT).show()
+                    SharedPrefManager.getInstance(applicationContext).clear()
+                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                    true
+                }
+                else -> true
+            }
+        }
+        binding.profileButton.setOnClickListener {
+
+            try {
+                val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+                popup.isAccessible = true
+                val menu = popup.get(popupMenu)
+                menu.javaClass
+                    .getDeclaredMethod("setForcedShowIcon", Boolean::class.java)
+                    .invoke(menu, true)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }finally {
+                popupMenu.show()
+            }
+        }
     }
 
 

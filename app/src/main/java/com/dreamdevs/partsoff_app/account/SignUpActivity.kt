@@ -1,9 +1,10 @@
-package com.dreamdevs.partsoff_app
+package com.dreamdevs.partsoff_app.account
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.dreamdevs.partsoff_app.MainActivity
 import com.dreamdevs.partsoff_app.databinding.ActivitySignUpBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.authModels.RegisterRequest

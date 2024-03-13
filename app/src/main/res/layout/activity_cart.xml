@@ -6,104 +6,186 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-         <!--toolbar -->
+
+    <!--toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white">
 
-        <RelativeLayout
+        <!-- ConstraintLayout for toolbar content -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
+            <!-- Back button -->
             <ImageButton
-                android:id="@+id/back_button"
-                android:background="@color/primary"
-                android:src="@drawable/baseline_arrow_back_24"
-                android:layout_width="44dp"
+                android:id="@+id/backButton"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/back"/>
+                android:background="@color/primary"
+                android:contentDescription="@string/back"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Cart button -->
+
+            <!-- Profile button -->
             <ImageButton
                 android:id="@+id/cartButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="23dp"
-                android:layout_toStartOf="@+id/profileButton"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cart"
                 android:src="@drawable/cart_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="TouchTargetSizeCheck" />
-
-            <TextView
-                android:id="@+id/cartQuantityTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/cartButton"
-                android:layout_alignEnd="@id/cartButton"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="-8dp"
-                android:gravity="center"
-                android:minWidth="20dp"
-                android:minHeight="20dp"
-                android:padding="4dp"
-                android:text="@string/_0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#F3E5F5" />
 
             <ImageButton
                 android:id="@+id/profileButton"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="15dp"
+                android:background="@color/primary"
                 android:contentDescription="@string/profile"
                 android:src="@drawable/profile_icon"
-                tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/cartButton" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/yourCartTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/your_cart"
-        android:padding="16dp"
+        android:orientation="horizontal">
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <TextView
+            android:id="@+id/yourCartTextView1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/your_cart"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cart_items_recyclerview"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Hold to delete Item"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    </LinearLayout>
+
+
+    <!-- RecyclerView for cart items -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/cart_item_layout" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <!-- RecyclerView for cart items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_items_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="gone" />
+
+        <!-- TextView for empty cart message -->
+        <TextView
+            android:id="@+id/empty_cart_message"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:text="Your cart is empty."
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <!-- Other views like total price, shipping fee, subtotal, and checkout button -->
+    </LinearLayout>
+
+    <!-- Total Price TextView -->
+
+    <TextView
+        android:id="@+id/totalQtyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Qty: 0"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/ShippingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shipping Fee: P35"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/subtotalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subtotal Price: 0.00"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="total Price: 0.00"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end" />
+
+    <!-- RelativeLayout for Checkout Button -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
-
+        <!-- Checkout Button -->
         <Button
-        android:id="@+id/checkout_button"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+            android:id="@+id/checkout_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg"
             android:textColor="@color/white"
             android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="202dp"
-        android:text="@string/checkout" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/checkout" />
 
     </RelativeLayout>
 </LinearLayout>
