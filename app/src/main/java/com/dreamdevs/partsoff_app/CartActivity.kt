@@ -65,6 +65,7 @@ class CartActivity : AppCompatActivity() {
         cartItemsRecyclerView.adapter = ProductAdapter(cartItems)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadProducts() {
         val sharedPreferences = SharedPrefManager.getInstance(this)
         cartItems = sharedPreferences.getCartItems()
