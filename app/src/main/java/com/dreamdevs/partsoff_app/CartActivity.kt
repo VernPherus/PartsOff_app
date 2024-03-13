@@ -3,6 +3,7 @@ package com.dreamdevs.partsoff_app
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -76,6 +77,17 @@ class CartActivity : AppCompatActivity() {
     private fun loadProducts() {
         val sharedPreferences = SharedPrefManager.getInstance(this)
         cartItems = sharedPreferences.getCartItems()
+
+        // Check if the cart is empty
+        if (cartItems.isEmpty()) {
+            // If the cart is empty, show the TextView and hide the RecyclerView
+            binding.cartItemsRecyclerview.visibility = View.GONE
+            binding.emptyCartMessage.visibility = View.VISIBLE
+        } else {
+            // If the cart is not empty, show the RecyclerView and hide the TextView
+            binding.cartItemsRecyclerview.visibility = View.VISIBLE
+            binding.emptyCartMessage.visibility = View.GONE
+        }
 
         // Calculate the subtotal price
         var subtotalPrice = 0.00

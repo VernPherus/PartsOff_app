@@ -97,13 +97,32 @@
 
 
     <!-- RecyclerView for cart items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cart_items_recyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="404dp"
-        android:layout_weight="1"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-         />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- RecyclerView for cart items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_items_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="gone" />
+
+        <!-- TextView for empty cart message -->
+        <TextView
+            android:id="@+id/empty_cart_message"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:text="Your cart is empty."
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <!-- Other views like total price, shipping fee, subtotal, and checkout button -->
+    </LinearLayout>
 
     <!-- Total Price TextView -->
 
