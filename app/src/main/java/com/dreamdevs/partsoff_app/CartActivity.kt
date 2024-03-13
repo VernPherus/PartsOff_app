@@ -120,8 +120,12 @@ class CartActivity : AppCompatActivity() {
 
     private fun setupCheckoutButton() {
         checkoutButton.setOnClickListener {
-            val intent = Intent(this, CheckoutActivity::class.java)
-            startActivity(intent)
+            if (cartItems.isEmpty()) {
+                Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, CheckoutActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
