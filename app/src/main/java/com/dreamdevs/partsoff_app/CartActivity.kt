@@ -24,7 +24,7 @@ class CartActivity : AppCompatActivity() {
     private var cartItems: List<ProductsData> = listOf()
     private var totalPrice : Double = 0.0
     private var subTotalPrice : Double = 0.0
-    private var totalQty : Double = 0.0
+    private var totalQty : Int = 0
     private var shipping : Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +128,6 @@ class CartActivity : AppCompatActivity() {
                 intent.putExtra("shipping", shipping.toString())
                 intent.putExtra("subTotalPrice", subTotalPrice.toString())
                 intent.putExtra("totalPrice", totalPrice.toString())
-                startActivity(intent)
                 startActivity(intent)
             }
 
