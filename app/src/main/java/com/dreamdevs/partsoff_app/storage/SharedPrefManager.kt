@@ -76,4 +76,18 @@
             val type = object : TypeToken<List<ProductsData>>() {}.type
             return gson.fromJson(json, type) ?: emptyList()
         }
+
+        fun removeCartItem(item: ProductsData) {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            // Get current cart items
+            val currentItems = getCartItems().toMutableList()
+
+            // Remove the specified item
+            currentItems.remove(item)
+
+            // Save the updated cart items
+            saveCartItems(currentItems)
+        }
     }

@@ -3,9 +3,11 @@ package com.dreamdevs.partsoff_app
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +58,12 @@ class CartActivity : AppCompatActivity() {
                 // You can implement the desired behavior when an item is clicked
             }
         })
+        productAdapter.setOnItemLongPressListener(object : ProductAdapter.OnItemLongPressListener {
+            override fun onItemLongPressed(position: Int) {
+                // Call the method to delete item from cart
+                deleteCartItem(position)
+            }
+        })
 
         // Set the adapter to the RecyclerView
         cartItemsRecyclerView.adapter = productAdapter
@@ -69,9 +77,21 @@ class CartActivity : AppCompatActivity() {
         cartItemsRecyclerView.adapter = ProductAdapter(cartItems)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadProducts() {
         val sharedPreferences = SharedPrefManager.getInstance(this)
         cartItems = sharedPreferences.getCartItems()
+
+        // Check if the cart is empty
+        if (cartItems.isEmpty()) {
+            // If the cart is empty, show the TextView and hide the RecyclerView
+            binding.cartItemsRecyclerview.visibility = View.GONE
+            binding.emptyCartMessage.visibility = View.VISIBLE
+        } else {
+            // If the cart is not empty, show the RecyclerView and hide the TextView
+            binding.cartItemsRecyclerview.visibility = View.VISIBLE
+            binding.emptyCartMessage.visibility = View.GONE
+        }
 
         // Calculate the subtotal price
         for (product in cartItems) {
@@ -100,14 +120,47 @@ class CartActivity : AppCompatActivity() {
 
     private fun setupCheckoutButton() {
         checkoutButton.setOnClickListener {
-            val intent = Intent(this, CheckoutActivity::class.java)
-            intent.putExtra("qty", totalQty.toString())
-            intent.putExtra("shipping", shipping.toString())
-            intent.putExtra("subTotalPrice", subTotalPrice.toString())
-            intent.putExtra("totalPrice", totalPrice.toString())
-            startActivity(intent)
+            if (cartItems.isEmpty()) {
+                Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, CheckoutActivity::class.java)
+                intent.putExtra("qty", totalQty.toString())
+                intent.putExtra("shipping", shipping.toString())
+                intent.putExtra("subTotalPrice", subTotalPrice.toString())
+                intent.putExtra("totalPrice", totalPrice.toString())
+                startActivity(intent)
+                startActivity(intent)
+            }
+
         }
     }
+
+    private fun deleteCartItem(position: Int) {
+        // Get the item to be deleted
+        val deletedItem = cartItems[position]
+
+        // Build and show a confirmation dialog
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Deletion")
+            .setMessage("Are you sure you want to delete this item from your cart?")
+            .setPositiveButton("Yes") { _, _ ->
+                // User confirmed, proceed with deletion
+                cartItems = cartItems.filterIndexed { index, _ -> index != position }
+
+                // Update shared preferences
+                val sharedPreferences = SharedPrefManager.getInstance(this)
+                sharedPreferences.removeCartItem(deletedItem)
+
+                // Reload the products from SharedPreferences
+                cartItems = sharedPreferences.getCartItems()
+
+                // Update the UI
+                loadProducts()
+            }
+            .setNegativeButton("No", null) // User canceled, do nothing
+            .show()
+    }
+
 
     @SuppressLint("DiscouragedPrivateApi")
     private fun popupMenu() {

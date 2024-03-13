@@ -14,7 +14,25 @@ import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 class ProductAdapter(private var productList: List<ProductsData>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable {
 
-    private lateinit var clickListener: OnItemListener
+    private var clickListener: OnItemListener = object : OnItemListener {
+        override fun onItemClick(position: Int) {
+            // default implementation
+        }
+    }
+
+    private var longPressListener: OnItemLongPressListener = object : OnItemLongPressListener {
+        override fun onItemLongPressed(position: Int) {
+            // default implementation
+        }
+    }
+
+    interface OnItemLongPressListener {
+        fun onItemLongPressed(position: Int)
+    }
+
+    fun setOnItemLongPressListener(listener: OnItemLongPressListener) {
+        longPressListener = listener
+    }
 
     interface OnItemListener {
         fun onItemClick(position: Int)
@@ -48,6 +66,10 @@ class ProductAdapter(private var productList: List<ProductsData>) :
             Glide.with(holder.itemView.context)
                 .load("http://64.23.185.162/uploads/product/large/$it")
                 .into(holder.productImageView)
+        }
+        holder.itemView.setOnLongClickListener {
+            longPressListener.onItemLongPressed(position)
+            true // Consume the long press event
         }
     }
 
