@@ -23,6 +23,7 @@ class ProductView : AppCompatActivity() {
         binding = ActivityProductViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val bundle: Bundle? = intent.extras
         val id = bundle!!.getInt("id")
         val title = bundle.getString("title")

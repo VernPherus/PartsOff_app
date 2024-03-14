@@ -116,6 +116,7 @@ class CartActivity : AppCompatActivity() {
 
         // Set the adapter to the RecyclerView
         cartItemsRecyclerView.adapter = ProductAdapter(cartItems)
+
     }
 
     private fun setupCheckoutButton() {
