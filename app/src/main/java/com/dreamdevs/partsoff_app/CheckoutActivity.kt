@@ -17,6 +17,7 @@ import com.dreamdevs.partsoff_app.databinding.ActivityCheckoutBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,15 +47,12 @@ class CheckoutActivity : AppCompatActivity() {
         subTotalPrice = bundle.getString("subTotalPrice").toString()
         totalPrice = bundle.getString("totalPrice").toString()
 
+        val itemsArrayString = bundle!!.getString("items")
+        val itemsArray = JSONArray(itemsArrayString)
         val cartItems: MutableList<OrderItem> = mutableListOf()
-        var index = 0
-        var itemKey = "item_id_$index"
-        while (intent.hasExtra(itemKey)){
-            val itemId = intent.getIntExtra(itemKey, 0)
-            val itemQty = intent.getIntExtra("item_qty_$index", 0)
-            cartItems.add(OrderItem(itemId, itemQty))
-            index++
-            itemKey = "item_id_$index"
+        for (i in 0 until itemsArray.length()) {
+            val itemObject = itemsArray.getJSONObject(i)
+            cartItems.add(OrderItem(itemObject))
         }
 
 

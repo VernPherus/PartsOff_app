@@ -15,6 +15,8 @@ import com.dreamdevs.partsoff_app.account.LoginActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityCartBinding // Correct import
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
+import org.json.JSONArray
+import org.json.JSONObject
 
 class CartActivity : AppCompatActivity() {
 
@@ -129,12 +131,17 @@ class CartActivity : AppCompatActivity() {
                 intent.putExtra("subTotalPrice", subTotalPrice.toString())
                 intent.putExtra("totalPrice", totalPrice.toString())
 
-                // Pass ID and quantity for each individual item
+                // Create JSON array to hold item details
+                val order_items = JSONArray()
                 for ((index, item) in cartItems.withIndex()) {
-                    intent.putExtra("item_id_$index", item.id)
-                    intent.putExtra("item_qty_$index", item.qty)
+                    val itemObject = JSONObject()
+                    itemObject.put("product_id", item.id)
+                    itemObject.put("qty", item.qty)
+                    order_items.put(itemObject)
                 }
 
+                // Put the JSON array as a string extra
+                intent.putExtra("items", order_items.toString())
 
                 startActivity(intent)
             }
