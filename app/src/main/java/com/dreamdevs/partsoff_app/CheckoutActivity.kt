@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityCheckoutBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
-import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,13 +25,12 @@ class CheckoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckoutBinding
 
-    private lateinit var qty: String
+    private lateinit var totalqty: String
     private lateinit var shipping: String
     private lateinit var subTotalPrice: String
     private lateinit var totalPrice: String
     private var selectedProvince = 0
 
-    private lateinit var orderItemList : List<OrderItem>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +41,23 @@ class CheckoutActivity : AppCompatActivity() {
         initializeProvinceSpinner()
 
         val bundle: Bundle? = intent.extras
-        qty = bundle!!.getString("qty").toString()
+        totalqty = bundle!!.getString("totalQty").toString()
         shipping = bundle.getString("shipping").toString()
         subTotalPrice = bundle.getString("subTotalPrice").toString()
         totalPrice = bundle.getString("totalPrice").toString()
+
+        val cartItems: MutableList<OrderItem> = mutableListOf()
+        var index = 0
+        var itemKey = "item_id_$index"
+        while (intent.hasExtra(itemKey)){
+            val itemId = intent.getIntExtra(itemKey, 0)
+            val itemQty = intent.getIntExtra("item_qty_$index", 0)
+            cartItems.add(OrderItem(itemId, itemQty))
+            index++
+            itemKey = "item_id_$index"
+        }
+
+
 
         displayTotal()
 
@@ -61,32 +72,28 @@ class CheckoutActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirmOrder.setOnClickListener {
-            val userId = SharedPrefManager.getInstance(this).user.email // Assuming user ID is the email
             val userEmail = SharedPrefManager.getInstance(this).user.email
-            val cartItems = SharedPrefManager.getInstance(this).getCartItems()
-
-
 
             performCheckout(
-                binding.editTextFirstName.toString(),
-                binding.editTextLastName.toString(),
+                binding.editTextFirstName.text.toString(),
+                binding.editTextLastName.text.toString(),
                 userEmail,
-                selectedProvince.toString(),
-                binding.editTextAddress.toString(),
-                binding.editTextCity.toString(),
-                binding.editTextBarangay.toString(),
-                binding.editZipAddress.toString(),
-                binding.editTextPhone.toString(),
+                selectedProvince,
+                binding.editTextAddress.text.toString(),
+                binding.editTextCity.text.toString(),
+                binding.editTextBarangay.text.toString(),
+                binding.editZipAddress.text.toString(),
+                binding.editTextPhone.text.toString(),
                 subTotalPrice,
                 totalPrice,
-                orderItemList
+                cartItems
             )
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun displayTotal() {
-        binding.totalQtyTextView.text = "Total Quantity : $qty"
+        binding.totalQtyTextView.text = "Total Quantity : $totalqty"
         binding.ShippingTextView.text = "Shipping Fee: ₱$shipping"
         binding.subtotalPriceTextView.text = "Subtotal Price: ₱$subTotalPrice"
         binding.totalPriceTextView.text = "₱$totalPrice"
@@ -190,7 +197,7 @@ class CheckoutActivity : AppCompatActivity() {
         firstName: String,
         lastName: String,
         email: String,
-        province: String,
+        province: Int,
         address: String,
         city: String,
         barangay: String,
