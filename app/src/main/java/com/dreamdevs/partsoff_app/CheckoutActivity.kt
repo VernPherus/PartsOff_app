@@ -1,9 +1,9 @@
 package com.dreamdevs.partsoff_app
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +17,7 @@ import com.dreamdevs.partsoff_app.databinding.ActivityCheckoutBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,10 +32,9 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var totalPrice: String
     private var selectedProvince = 0
 
-
+    private val allCheckouts: MutableList<MutableList<OrderItem>> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -56,8 +56,7 @@ class CheckoutActivity : AppCompatActivity() {
             index++
             itemKey = "item_id_$index"
         }
-
-
+        val basta : MutableList<OrderItem> = cartItems.toList().toMutableList()
 
         displayTotal()
 
@@ -74,6 +73,12 @@ class CheckoutActivity : AppCompatActivity() {
         binding.buttonConfirmOrder.setOnClickListener {
             val userEmail = SharedPrefManager.getInstance(this).user.email
 
+            val cartItems: MutableList<OrderItem> = mutableListOf()
+            // Populate cartItems with items from the cart view
+            // Example: cartItems.add(OrderItem(itemId, itemQty))
+
+            allCheckouts.add(cartItems)
+
             performCheckout(
                 binding.editTextFirstName.text.toString(),
                 binding.editTextLastName.text.toString(),
@@ -86,17 +91,82 @@ class CheckoutActivity : AppCompatActivity() {
                 binding.editTextPhone.text.toString(),
                 subTotalPrice,
                 totalPrice,
-                cartItems
+                basta
             )
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun displayTotal() {
         binding.totalQtyTextView.text = "Total Quantity : $totalqty"
         binding.ShippingTextView.text = "Shipping Fee: ₱$shipping"
         binding.subtotalPriceTextView.text = "Subtotal Price: ₱$subTotalPrice"
         binding.totalPriceTextView.text = "₱$totalPrice"
+    }
+
+    private fun performCheckout(
+        firstName: String,
+        lastName: String,
+        email: String,
+        province: Int,
+        address: String,
+        city: String,
+        barangay: String,
+        zip: String,
+        mobile: String,
+        subtotal: String,
+        grandTotal: String,
+        orderItems: List<OrderItem>
+    ) {
+        val call = RetrofitClient.authService.processCheckout(
+            firstName, lastName, email, province, address, city, barangay, zip, mobile, subtotal, grandTotal, orderItems
+        )
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@CheckoutActivity, "Order saved successfully", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
+                } else {
+                    Toast.makeText(this@CheckoutActivity, "Order saving failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    class ProvinceArrayAdapter(context: Context, provinces: List<Province>) :
+        ArrayAdapter<Province>(context, 0, provinces) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View =
+            createViewFromResource(
+                position,
+                convertView,
+                parent,
+                android.R.layout.simple_spinner_dropdown_item
+            )
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View =
+            createViewFromResource(
+                position,
+                convertView,
+                parent,
+                android.R.layout.simple_spinner_dropdown_item
+            )
+
+        private fun createViewFromResource(
+            position: Int,
+            convertView: View?,
+            parent: ViewGroup,
+            resource: Int
+        ): View {
+            val province = getItem(position)
+            val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.text = province?.name
+            return view
+        }
     }
 
     data class Province(val code: Int, val name: String)
@@ -191,70 +261,5 @@ class CheckoutActivity : AppCompatActivity() {
                 }
             }
 
-    }
-
-    private fun performCheckout(
-        firstName: String,
-        lastName: String,
-        email: String,
-        province: Int,
-        address: String,
-        city: String,
-        barangay: String,
-        zip: String,
-        mobile: String,
-        subtotal: String,
-        grandTotal: String,
-        orderItems: List<OrderItem> // Change the type to match your order item class
-    ) {
-
-        val call = RetrofitClient.authService.processCheckout(firstName, lastName, email, province, address, city, barangay, zip, mobile, subtotal, grandTotal, orderItems)
-        call.enqueue(object : Callback<Void>{
-            override fun onResponse(call: Call<Void>, response: Response<Void>){
-                if (response.isSuccessful){
-                    Toast.makeText(this@CheckoutActivity, "Order saved successfully", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
-                }else {
-                    Toast.makeText(this@CheckoutActivity, "Order saving failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-    }
-
-    class ProvinceArrayAdapter(context: Context, provinces: List<Province>) :
-        ArrayAdapter<Province>(context, 0, provinces) {
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View =
-            createViewFromResource(
-                position,
-                convertView,
-                parent,
-                android.R.layout.simple_spinner_dropdown_item
-            )
-
-        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View =
-            createViewFromResource(
-                position,
-                convertView,
-                parent,
-                android.R.layout.simple_spinner_dropdown_item
-            )
-
-        private fun createViewFromResource(
-            position: Int,
-            convertView: View?,
-            parent: ViewGroup,
-            resource: Int
-        ): View {
-            val province = getItem(position)
-            val view = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
-            val textView = view.findViewById<TextView>(android.R.id.text1)
-            textView.text = province?.name
-            return view
-        }
     }
 }

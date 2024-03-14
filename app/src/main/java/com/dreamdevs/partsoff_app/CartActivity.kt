@@ -136,7 +136,6 @@ class CartActivity : AppCompatActivity() {
                     intent.putExtra("item_qty_$index", item.qty)
                 }
 
-
                 startActivity(intent)
             }
         }
@@ -201,4 +200,5 @@ class CartActivity : AppCompatActivity() {
             }
         }
     }
+
 }
