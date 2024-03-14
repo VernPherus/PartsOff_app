@@ -9,7 +9,6 @@ data class CheckoutRequest(
     @SerializedName("email") val email: String,
     @SerializedName("first_name") val firstName: String,
     @SerializedName("grand_total") val grandTotal: String,
-    @SerializedName("id") val id: String,
     @SerializedName("last_name") val lastName: String,
     @SerializedName("mobile") val mobile: String,
     @SerializedName("order_items") val orderItems: List<OrderItem>,
