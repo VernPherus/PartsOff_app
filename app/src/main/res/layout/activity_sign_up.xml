@@ -43,7 +43,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="432dp"
+            android:layout_height="481dp"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:padding="24dp"
@@ -79,18 +79,19 @@
                 android:paddingEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/signuptext"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/signuptext"
                 app:layout_constraintTop_toBottomOf="@+id/signuptext"
-                app:layout_constraintVertical_bias="0.041" />
+                app:layout_constraintVertical_bias="0.037" />
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="12dp"
                 android:autofillHints="email"
                 android:background="@drawable/custom_edit_text"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/email_icon"
                 android:drawablePadding="8dp"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
@@ -103,40 +104,42 @@
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="12dp"
                 android:autofillHints="email"
                 android:background="@drawable/custom_edit_text"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/phone_icon"
                 android:drawablePadding="8dp"
-                android:hint="@string/phone"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/email"
-                tools:layout_editor_absoluteX="24dp" />
+                tools:layout_editor_absoluteX="32dp" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="12dp"
                 android:autofillHints="password"
                 android:background="@drawable/custom_edit_text"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/password_icon"
                 android:drawablePadding="8dp"
                 android:hint="@string/password_hint"
-                android:inputType="textPassword"
 
+                android:inputType="textPassword"
                 android:padding="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
-                tools:layout_editor_absoluteX="24dp" />
+                tools:layout_editor_absoluteX="16dp" />
 
             <EditText
                 android:id="@+id/reEnterPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="12dp"
                 android:autofillHints="new-password"
                 android:background="@drawable/custom_edit_text"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@drawable/password_icon"
                 android:drawablePadding="8dp"
                 android:hint="@string/re_enter_password_hint"
                 android:inputType="textPassword"
@@ -148,10 +151,10 @@
                 android:id="@+id/signupButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="@string/sign_up_button"
-                android:textSize="18sp"
-                android:textColor="@color/white"
                 android:background="@drawable/bg"
+                android:text="@string/sign_up_button"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

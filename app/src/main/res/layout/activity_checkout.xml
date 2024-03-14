@@ -116,7 +116,7 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
+        app:layout_constraintVertical_bias="0.592"
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
@@ -149,6 +149,22 @@
             tools:layout_editor_absoluteY="64dp" />
 
         <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="192dp" />
+
+        <Spinner
+            android:id="@+id/provinceSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
             android:id="@+id/editTextAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,15 +176,37 @@
             tools:layout_editor_absoluteY="128dp" />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/editTextCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:hint="@string/phone_number"
-            android:inputType="phone"
+            android:hint="@string/city"
+            android:importantForAutofill="no"
+            android:inputType="textPostalAddress"
             android:minHeight="48dp"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="192dp" />
+            tools:layout_editor_absoluteY="128dp" />
+
+        <EditText
+            android:id="@+id/editTextBarangay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/barangay"
+            android:importantForAutofill="no"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="128dp" />
+
+        <EditText
+            android:id="@+id/editZipAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/zip_code"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="128dp" />
 
     </LinearLayout>
 

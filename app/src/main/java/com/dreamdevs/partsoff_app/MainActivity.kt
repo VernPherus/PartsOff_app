@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     putExtra("description", clickedProduct.description.toString())
                     putExtra("price", clickedProduct.price.toString())
                     putExtra("qty", clickedProduct.qty.toString())
-                    putExtra("image", clickedProduct.productImages?.firstOrNull()?.image)
+                    putExtra("image", clickedProduct.productImages.firstOrNull()?.image)
                 }
                 startActivity(intent)
 
@@ -182,6 +182,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+//    private fun openDrawerWithUserDetails() {
+//
+//        binding.drawerLayout.openDrawer(GravityCompat.START)
+//
+//        val navView: NavigationView = findViewById(R.id.navView)
+//        val headerView = layoutInflater.inflate(R.layout.navinfo, navView, false)
+//        navView.addHeaderView(headerView)
+//
+//        val userEmailTextView = headerView.findViewById<TextView>(R.id.nav_email)
+//        userEmailTextView.text = SharedPrefManager.getInstance(applicationContext).user.email
+//
+//    }
 
 }
