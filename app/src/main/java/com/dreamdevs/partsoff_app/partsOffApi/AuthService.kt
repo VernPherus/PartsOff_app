@@ -7,12 +7,11 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface AuthService {
     @FormUrlEncoded
     @POST("authenticate")
-    fun login(
+    fun     login(
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<Void> // Update the return type to Void since there's no token
@@ -34,8 +33,8 @@ interface AuthService {
     @POST("process-checkout")
     fun processCheckout(
         @Field("id") id : String,
-        @Field("first_name") first_name : String,
-        @Field("last_name") last_name : String,
+        @Field("first_name") firstName : String,
+        @Field("last_name") lastName : String,
         @Field("email") email : String,
         @Field("province") province : String,
         @Field("address") address : String,
@@ -44,8 +43,8 @@ interface AuthService {
         @Field("zip") zip : String,
         @Field("mobile") mobile : String,
         @Field("subtotal") subtotal : String,
-        @Field("grand_total") grand_total : String,
-        @Field("order_items") order_items : List<OrderItem>
-    )
+        @Field("grand_total") grandTotal : String,
+        @Field("order_items") orderItems : List<OrderItem>
+    ) : Call<Void>
 
 }

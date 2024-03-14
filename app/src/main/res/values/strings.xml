@@ -75,5 +75,8 @@
     <string name="shipping_fee_p35">Shipping Fee: ₱35</string>
     <string name="total_qty_0">Total Qty: 0</string>
     <string name="subtotal_price_0_00">Subtotal Price: ₱0.0</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="city">City</string>
+    <string name="barangay">Barangay</string>
 
 </resources>
