@@ -125,13 +125,20 @@ class CartActivity : AppCompatActivity() {
                 Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(this, CheckoutActivity::class.java)
-                intent.putExtra("qty", totalQty.toString())
+                intent.putExtra("totalQty", totalQty.toString())
                 intent.putExtra("shipping", shipping.toString())
                 intent.putExtra("subTotalPrice", subTotalPrice.toString())
                 intent.putExtra("totalPrice", totalPrice.toString())
+
+                // Pass ID and quantity for each individual item
+                for ((index, item) in cartItems.withIndex()) {
+                    intent.putExtra("item_id_$index", item.id)
+                    intent.putExtra("item_qty_$index", item.qty)
+                }
+
+
                 startActivity(intent)
             }
-
         }
     }
 

@@ -138,9 +138,17 @@ class ProductView : AppCompatActivity() {
         // Calculate the total price based on selected quantity
         val totalPrice = price!!.toInt() * selectedQuantity
 
-        // Create a new product object with the calculated total price
+        // Check if the product already exists in the cart
+        val existingProduct = cartItems.find { it.id == id }
+        if (existingProduct != null) {
+            // Product already exists in the cart, show a message to the user
+            Toast.makeText(this@ProductView, "Product is already in the cart", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Create a new product object with the calculated total pr..ice
         val product = ProductsData(
-            id, title!!,"", totalPrice, selectedQuantity,
+            id, title!!, "", totalPrice, selectedQuantity,
             listOf(ProductImage(imageUrl!!))
         )
 
@@ -152,5 +160,6 @@ class ProductView : AppCompatActivity() {
 
         Toast.makeText(this@ProductView, "Added to Cart", Toast.LENGTH_SHORT).show()
     }
+
 }
 
