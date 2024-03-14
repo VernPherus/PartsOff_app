@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityCheckoutBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
+import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
+import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,12 +61,16 @@ class CheckoutActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirmOrder.setOnClickListener {
+            val userId = SharedPrefManager.getInstance(this).user.email // Assuming user ID is the email
+            val userEmail = SharedPrefManager.getInstance(this).user.email
+            val cartItems = SharedPrefManager.getInstance(this).getCartItems()
+
+
 
             performCheckout(
-                "id",
                 binding.editTextFirstName.toString(),
                 binding.editTextLastName.toString(),
-                "email",
+                userEmail,
                 selectedProvince.toString(),
                 binding.editTextAddress.toString(),
                 binding.editTextCity.toString(),
@@ -75,7 +81,6 @@ class CheckoutActivity : AppCompatActivity() {
                 totalPrice,
                 orderItemList
             )
-
         }
     }
 
@@ -182,22 +187,21 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun performCheckout(
-        id : String,
-        firstName : String,
-        lastName : String,
-        email : String,
-        province : String,
-        address : String,
-        city : String,
-        barangay : String,
-        zip : String,
-        mobile : String,
-        subtotal : String,
-        grandTotal : String,
-        orderItems : List<OrderItem>
-    ){
+        firstName: String,
+        lastName: String,
+        email: String,
+        province: String,
+        address: String,
+        city: String,
+        barangay: String,
+        zip: String,
+        mobile: String,
+        subtotal: String,
+        grandTotal: String,
+        orderItems: List<OrderItem> // Change the type to match your order item class
+    ) {
 
-        val call = RetrofitClient.authService.processCheckout(id, firstName, lastName, email, province, address, city, barangay, zip, mobile, subtotal, grandTotal, orderItems)
+        val call = RetrofitClient.authService.processCheckout(firstName, lastName, email, province, address, city, barangay, zip, mobile, subtotal, grandTotal, orderItems)
         call.enqueue(object : Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>){
                 if (response.isSuccessful){
@@ -247,9 +251,3 @@ class CheckoutActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
-
-
-

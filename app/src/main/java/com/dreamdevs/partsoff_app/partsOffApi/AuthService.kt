@@ -32,7 +32,6 @@ interface AuthService {
     @FormUrlEncoded
     @POST("process-checkout")
     fun processCheckout(
-        @Field("id") id : String,
         @Field("first_name") firstName : String,
         @Field("last_name") lastName : String,
         @Field("email") email : String,
