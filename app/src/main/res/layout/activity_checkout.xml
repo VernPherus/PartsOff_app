@@ -116,7 +116,6 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
@@ -149,6 +148,17 @@
             tools:layout_editor_absoluteY="64dp" />
 
         <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="192dp" />
+
+        <EditText
             android:id="@+id/editTextAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,16 +169,11 @@
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="128dp" />
 
-        <EditText
-            android:id="@+id/editTextPhone"
+        <Spinner
+            android:id="@+id/provinceSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:hint="@string/phone_number"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="192dp" />
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 

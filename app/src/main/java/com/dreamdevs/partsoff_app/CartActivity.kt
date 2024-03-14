@@ -24,7 +24,7 @@ class CartActivity : AppCompatActivity() {
     private var cartItems: List<ProductsData> = listOf()
     private var totalPrice : Double = 0.0
     private var subTotalPrice : Double = 0.0
-    private var totalQty : Double = 0.0
+    private var totalQty : Int = 0
     private var shipping : Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,7 +129,6 @@ class CartActivity : AppCompatActivity() {
                 intent.putExtra("subTotalPrice", subTotalPrice.toString())
                 intent.putExtra("totalPrice", totalPrice.toString())
                 startActivity(intent)
-                startActivity(intent)
             }
 
         }
@@ -145,7 +144,7 @@ class CartActivity : AppCompatActivity() {
             .setMessage("Are you sure you want to delete this item from your cart?")
             .setPositiveButton("Yes") { _, _ ->
                 // User confirmed, proceed with deletion
-                cartItems = cartItems.filterIndexed { index, _ -> index != position }
+                cartItems = cartItems.toMutableList().apply { removeAt(position) }
 
                 // Update shared preferences
                 val sharedPreferences = SharedPrefManager.getInstance(this)
@@ -156,6 +155,8 @@ class CartActivity : AppCompatActivity() {
 
                 // Update the UI
                 loadProducts()
+
+                recreate()
             }
             .setNegativeButton("No", null) // User canceled, do nothing
             .show()
