@@ -57,7 +57,7 @@ class CheckoutActivity : AppCompatActivity() {
             index++
             itemKey = "item_id_$index"
         }
-        val basta : MutableList<OrderItem> = cartItems.toList().toMutableList()
+        val basta : MutableList<OrderItem> = cartItems
 
         displayTotal()
 
