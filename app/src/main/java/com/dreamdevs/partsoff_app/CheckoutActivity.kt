@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dreamdevs.partsoff_app.databinding.ActivityCheckoutBinding
 import com.dreamdevs.partsoff_app.partsOffApi.RetrofitClient
+import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.CheckoutRequest
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
 import com.dreamdevs.partsoff_app.storage.SharedPrefManager
 import com.google.gson.Gson
@@ -26,10 +27,10 @@ class CheckoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckoutBinding
 
-    private lateinit var totalqty: String
-    private lateinit var shipping: String
-    private lateinit var subTotalPrice: String
-    private lateinit var totalPrice: String
+    private var totalqty = 0
+    private var shipping = 0.0
+    private var subTotalPrice= 0.0
+    private var totalPrice = 0.0
     private var selectedProvince = 0
 
     private val allCheckouts: MutableList<MutableList<OrderItem>> = mutableListOf()
@@ -41,10 +42,10 @@ class CheckoutActivity : AppCompatActivity() {
         initializeProvinceSpinner()
 
         val bundle: Bundle? = intent.extras
-        totalqty = bundle!!.getString("totalQty").toString()
-        shipping = bundle.getString("shipping").toString()
-        subTotalPrice = bundle.getString("subTotalPrice").toString()
-        totalPrice = bundle.getString("totalPrice").toString()
+        totalqty = bundle!!.getInt("totalQty")
+        shipping = bundle.getDouble("shipping")
+        subTotalPrice = bundle.getDouble("subTotalPrice")
+        totalPrice = bundle.getDouble("totalPrice")
 
         val cartItems: MutableList<OrderItem> = mutableListOf()
         var index = 0
@@ -93,6 +94,9 @@ class CheckoutActivity : AppCompatActivity() {
                 totalPrice,
                 basta
             )
+
+            startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
+
         }
     }
 
@@ -113,18 +117,32 @@ class CheckoutActivity : AppCompatActivity() {
         barangay: String,
         zip: String,
         mobile: String,
-        subtotal: String,
-        grandTotal: String,
+        subtotal: Double,
+        grandTotal: Double,
         orderItems: List<OrderItem>
     ) {
-        val call = RetrofitClient.authService.processCheckout(
-            firstName, lastName, email, province, address, city, barangay, zip, mobile, subtotal, grandTotal, orderItems
+
+        val checkoutRequest = CheckoutRequest(
+            address,
+            barangay,
+            city,
+            email,
+            firstName,
+            grandTotal,
+            lastName,
+            mobile,
+            orderItems,
+            province,
+            subtotal,
+            zip
         )
+
+        val call = RetrofitClient.authService.processCheckout(checkoutRequest)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@CheckoutActivity, "Order saved successfully", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
+
                 } else {
                     Toast.makeText(this@CheckoutActivity, "Order saving failed", Toast.LENGTH_SHORT).show()
                 }

@@ -1,8 +1,10 @@
 package com.dreamdevs.partsoff_app.partsOffApi
 
+import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.CheckoutRequest
 import com.dreamdevs.partsoff_app.partsOffModels.checkoutModels.OrderItem
 import com.dreamdevs.partsoff_app.partsOffModels.productModels.ProductsData
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -32,18 +34,7 @@ interface AuthService {
     @FormUrlEncoded
     @POST("process-checkout")
     fun processCheckout(
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String,
-        @Field("email") email: String,
-        @Field("province") province: Int,
-        @Field("address") address: String,
-        @Field("city") city: String,
-        @Field("barangay") barangay: String,
-        @Field("zip") zip: String,
-        @Field("mobile") mobile: String,
-        @Field("subtotal") subtotal: String,
-        @Field("grand_total") grandTotal: String,
-        @Field("order_items") orderItems: List<OrderItem>
+        @Body checkoutRequest: CheckoutRequest
     ) : Call<Void>
 
 }
